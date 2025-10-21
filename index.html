@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESU-RSI - Identification du Personnel Académique</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="description" content="Application de gestion des renseignements du personnel académique de l'ESU-RSI">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Bibliothèques pour l'exportation PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <img src="app-logo.png" alt="ESU-RSI Logo" class="logo">
+                <div class="header-text">
+                    <h1>Application de gestion des renseignements</h1>
+                    <h2>Personnel Académique de l'ESU-RSI</h2>
+                </div>
+                <div class="admin-section">
+                    <button id="adminLoginBtn" class="btn btn-admin">
+                        <i class="fas fa-user-shield"></i> Admin
+                    </button>
+                    <div id="adminPanel" style="display: none;" class="admin-panel">
+                        <div class="admin-info">
+                            <i class="fas fa-user-shield"></i>
+                            <span id="adminUsername"></span>
+                        </div>
+                        <button id="logoutBtn" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-sign-out-alt"></i> Déconnexion
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation par onglets -->
+        <nav class="navigation-tabs">
+            <div class="tab-container">
+                <button class="tab-btn active" data-tab="formulaire">
+                    <i class="fas fa-user-plus"></i>
+                    Formulaire d'identification
+                </button>
+                <button class="tab-btn" data-tab="donnees" id="donneesTab" style="display: none;">
+                    <i class="fas fa-database"></i>
+                    Données des professeurs
+                </button>
+            </div>
+        </nav>
+
+        <main class="main-content">
+            <!-- Page Formulaire -->
+            <div id="page-formulaire" class="page-content active">
+                <div class="form-container">
+                    <h3>Formulaire d'identification des professeurs</h3>
+                
+                <form id="professeurForm" class="form">
+                    <!-- Informations personnelles -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-user"></i> Informations personnelles</h4>
+                        
+                        <div class="form-group">
+                            <label for="nom" class="required">Nom complet (Nom, Postnom, Prénom)</label>
+                            <input type="text" id="nom" name="nom" placeholder="Exemple: IKAMA CIMANGA Jean" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sexe" class="required">Sexe</label>
+                            <select id="sexe" name="sexe" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Masculin">Masculin</option>
+                                <option value="Féminin">Féminin</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="matricule" class="required">Matricule ESU</label>
+                            <input type="text" id="matricule" name="matricule" placeholder="Entrez votre matricule ESU" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lieuNaissance" class="required">Lieu de naissance</label>
+                            <input type="text" id="lieuNaissance" name="lieuNaissance" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateNaissance" class="required">Date de naissance</label>
+                            <input type="date" id="dateNaissance" name="dateNaissance" required>
+                        </div>
+                    </div>
+
+                    <!-- Informations académiques -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-graduation-cap"></i> Informations académiques</h4>
+                        
+                        <div class="form-group">
+                            <label for="grade" class="required">Grade actuel</label>
+                            <select id="grade" name="grade" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="PE">PE - Professeur Émérite</option>
+                                <option value="PO">PO - Professeur Ordinaire</option>
+                                <option value="P">P - Professeur</option>
+                                <option value="PA">PA - Professeur Associé</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="paysSoutenance" class="required">Pays de soutenance de la thèse</label>
+                            <input type="text" id="paysSoutenance" name="paysSoutenance" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="universiteSoutenance" class="required">Université de soutenance de la thèse</label>
+                            <input type="text" id="universiteSoutenance" name="universiteSoutenance" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroEquivalence">N° arrêté d'équivalence (si diplôme obtenu hors RDC)</label>
+                            <input type="text" id="numeroEquivalence" name="numeroEquivalence">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="arreteEquivalence">Copie de l'arrêté d'équivalence (si obtenu hors RDC)</label>
+                            <input type="file" id="arreteEquivalence" name="arreteEquivalence" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dateSoutenance" class="required">Date de soutenance de la thèse</label>
+                            <input type="date" id="dateSoutenance" name="dateSoutenance" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="typeDiplome" class="required">Type de diplôme de doctorat</label>
+                            <select id="typeDiplome" name="typeDiplome" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Académique/Recherche">Académique/Recherche</option>
+                                <option value="Professionnel">Professionnel</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="universiteAttache" class="required">Université d'attache</label>
+                            <select id="universiteAttache" name="universiteAttache" required>
+                                <option value="">Sélectionnez une université</option>
+                            </select>
+                            <div class="university-logo" id="universityLogo"></div>
+                        </div>
+                    </div>
+
+                    <!-- Contact et administration -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-address-book"></i> Contact et administration</h4>
+                        
+                        <div class="form-group">
+                            <label for="email">Adresse email</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telephone" class="required">N° téléphone</label>
+                            <input type="tel" id="telephone" name="telephone" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numeroArrete" class="required">N° référence du dernier arrêté ministériel</label>
+                            <input type="text" id="numeroArrete" name="numeroArrete" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="primeInstitutionnelle" class="required">Avez-vous la prime institutionnelle ?</label>
+                            <select id="primeInstitutionnelle" name="primeInstitutionnelle" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salaireBase" class="required">Avez-vous le salaire de base ?</label>
+                            <select id="salaireBase" name="salaireBase" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Documents -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-file-upload"></i> Documents à joindre</h4>
+                        
+                        <div class="form-group">
+                            <label for="photoIdentite" class="required">Photo d'identité (JPG, PNG, JPEG, max 8MB)</label>
+                            <input type="file" id="photoIdentite" name="photoIdentite" accept=".jpg,.jpeg,.png" required>
+                            <div class="file-info">Formats acceptés: JPG, PNG, JPEG. Taille maximum: 8MB</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="copieDiplome" class="required">Copie de votre dernier diplôme</label>
+                            <input type="file" id="copieDiplome" name="copieDiplome" accept=".pdf,.jpg,.jpeg,.png" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="copieThese" class="required">Copie de la thèse (PDF)</label>
+                            <input type="file" id="copieThese" name="copieThese" accept=".pdf" required>
+                            <div class="file-info">Format accepté: PDF uniquement</div>
+                        </div>
+                    </div>
+
+                    <!-- Commentaire et confirmation -->
+                    <div class="form-section">
+                        <h4><i class="fas fa-comment"></i> Commentaire et confirmation</h4>
+                        
+                        <div class="form-group">
+                            <label for="commentaire" class="required">Commentaire (max 50 caractères)</label>
+                            <textarea id="commentaire" name="commentaire" maxlength="50" required></textarea>
+                            <div class="char-counter">0/50 caractères</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="confirmation" name="confirmation" required>
+                                <span class="checkmark"></span>
+                                <span class="required">Ces renseignements sont vrais et vérifiables</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Enregistrer
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-undo"></i> Réinitialiser
+                        </button>
+                    </div>
+                </form>
+            </div>
+            </div>
+
+            <!-- Page Données des professeurs -->
+            <div id="page-donnees" class="page-content">
+                <!-- Section d'affichage des données (visible seulement pour les admins) -->
+                <div class="data-section" id="dataSection">
+                    <div class="data-header">
+                        <h3><i class="fas fa-database"></i> Données des professeurs</h3>
+                        <div class="header-controls">
+                            <!-- Panel administrateur (si connecté) -->
+                            <div id="adminStatsPanel" class="admin-stats" style="display: none;">
+                                <div class="stat-item">
+                                    <span class="stat-label">Total:</span>
+                                    <span id="totalProfesseurs" class="stat-value">0</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">Dernière connexion:</span>
+                                    <span id="lastLogin" class="stat-value">-</span>
+                                </div>
+                                <button id="passwordChangeBtn" class="btn btn-warning btn-sm">
+                                    <i class="fas fa-key"></i> Changer mot de passe
+                                </button>
+                            </div>
+                            
+                            <div class="search-container">
+                                <input type="text" id="searchInput" placeholder="Rechercher un professeur..." disabled>
+                                <button id="searchBtn" class="btn btn-search" disabled>
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                <button id="exportPdfBtn" class="btn btn-secondary" style="display: none;">
+                                    <i class="fas fa-file-pdf"></i> Exporter PDF
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="professeursTable" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Photo</th>
+                                    <th>Nom complet</th>
+                                    <th>Matricule</th>
+                                    <th>Grade</th>
+                                    <th>Université</th>
+                                    <th>Téléphone</th>
+                                    <th>Documents</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="professeursTableBody">
+                                <!-- Les données seront insérées ici par JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal pour afficher les détails -->
+        <div id="detailModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Détails du professeur</h3>
+                    <div class="modal-header-actions">
+                        <button id="exportDetailPdfBtn" class="btn btn-secondary btn-sm">
+                            <i class="fas fa-file-pdf"></i> Exporter PDF
+                        </button>
+                        <span class="close">&times;</span>
+                    </div>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Contenu du modal -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de connexion administrateur -->
+        <div id="loginModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-user-shield"></i> Connexion Administrateur</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="authMessage" class="message" style="display: none;"></div>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="loginUsername">Nom d'utilisateur:</label>
+                            <input type="text" id="loginUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Mot de passe:</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-sign-in-alt"></i> Se connecter
+                            </button>
+                        </div>
+                    </form>
+                    <div class="login-info">
+                        <p><small><i class="fas fa-info-circle"></i> Identifiants par défaut: admin / admin123</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de changement de mot de passe -->
+        <div id="passwordModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-key"></i> Changer le mot de passe</h3>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div id="passwordMessage" class="message" style="display: none;"></div>
+                    <form id="passwordForm">
+                        <div class="form-group">
+                            <label for="oldPassword">Ancien mot de passe:</label>
+                            <input type="password" id="oldPassword" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newPassword">Nouveau mot de passe:</label>
+                            <input type="password" id="newPassword" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">Confirmer le nouveau mot de passe:</label>
+                            <input type="password" id="confirmPassword" required minlength="6">
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Mettre à jour
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading spinner -->
+        <div id="loadingSpinner" class="loading-spinner">
+            <div class="spinner"></div>
+            <p>Chargement...</p>
+        </div>
+    </div>
+
+    <!-- SQLite est maintenant géré côté serveur avec Node.js -->
+    <script src="app-client.js"></script>
+</body>
+</html>

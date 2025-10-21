@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Application ESU-RSI</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            border-left: 4px solid #2563eb;
+            background: #f8f9ff;
+        }
+        .success { border-left-color: #059669; background: #f0fdf4; }
+        .error { border-left-color: #dc2626; background: #fef2f2; }
+        .warning { border-left-color: #d97706; background: #fef3c7; }
+        h1, h2 { color: #2563eb; }
+        .status { font-weight: bold; }
+        .btn {
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .btn:hover { background: #1d4ed8; }
+        .btn-secondary { background: #64748b; }
+        .btn-secondary:hover { background: #475569; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Test de l'Application ESU-RSI</h1>
+        <p>Cette page permet de tester les fonctionnalités de l'application de gestion du personnel académique.</p>
+        
+        <h2>📋 Tests automatiques</h2>
+        <div id="testResults"></div>
+        
+        <h2>🔗 Actions de test</h2>
+        <button class="btn" onclick="testDatabase()">Tester la base de données</button>
+        <button class="btn" onclick="testFileLoading()">Tester le chargement des fichiers</button>
+        <button class="btn" onclick="testValidation()">Tester la validation</button>
+        <button class="btn btn-secondary" onclick="clearData()">Effacer les données de test</button>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="index.html" class="btn">🏠 Retour à l'application principale</a>
+        </div>
+        
+        <h2>📊 Informations système</h2>
+        <div id="systemInfo"></div>
+    </div>
+
+    <script>
+        // Tests automatiques au chargement
+        document.addEventListener('DOMContentLoaded', () => {
+            runAutomaticTests();
+            displaySystemInfo();
+        });
+
+        async function runAutomaticTests() {
+            const results = document.getElementById('testResults');
+            results.innerHTML = '';
+
+            // Test 1: Chargement de SQL.js
+            addTestResult('Chargement de SQL.js', await testSQLJS(), results);
+            
+            // Test 2: LocalStorage disponible
+            addTestResult('LocalStorage disponible', testLocalStorage(), results);
+            
+            // Test 3: Fetch API disponible
+            addTestResult('Fetch API disponible', testFetchAPI(), results);
+            
+            // Test 4: FileReader API disponible
+            addTestResult('FileReader API disponible', testFileReader(), results);
+            
+            // Test 5: Chargement du fichier universités
+            addTestResult('Chargement etab.json', await testUniversitiesFile(), results);
+        }
+
+        async function testSQLJS() {
+            try {
+                if (typeof initSqlJs !== 'undefined') {
+                    return { success: true, message: 'SQL.js est disponible' };
+                } else {
+                    return { success: false, message: 'SQL.js n\'est pas chargé' };
+                }
+            } catch (error) {
+                return { success: false, message: `Erreur SQL.js: ${error.message}` };
+            }
+        }
+
+        function testLocalStorage() {
+            try {
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                return { success: true, message: 'LocalStorage fonctionne correctement' };
+            } catch (error) {
+                return { success: false, message: `LocalStorage indisponible: ${error.message}` };
+            }
+        }
+
+        function testFetchAPI() {
+            if (typeof fetch !== 'undefined') {
+                return { success: true, message: 'Fetch API disponible' };
+            } else {
+                return { success: false, message: 'Fetch API non supportée' };
+            }
+        }
+
+        function testFileReader() {
+            if (typeof FileReader !== 'undefined') {
+                return { success: true, message: 'FileReader API disponible' };
+            } else {
+                return { success: false, message: 'FileReader API non supportée' };
+            }
+        }
+
+        async function testUniversitiesFile() {
+            try {
+                const response = await fetch('./etab.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    if (Array.isArray(data) && data.length > 0) {
+                        return { 
+                            success: true, 
+                            message: `Fichier universités chargé (${data.length} universités)` 
+                        };
+                    } else {
+                        return { success: false, message: 'Fichier universités vide ou invalide' };
+                    }
+                } else {
+                    return { success: false, message: `Erreur HTTP: ${response.status}` };
+                }
+            } catch (error) {
+                return { success: false, message: `Erreur de chargement: ${error.message}` };
+            }
+        }
+
+        function addTestResult(testName, result, container) {
+            const div = document.createElement('div');
+            div.className = `test-item ${result.success ? 'success' : 'error'}`;
+            div.innerHTML = `
+                <strong>${testName}:</strong> 
+                <span class="status">${result.success ? '✅ SUCCÈS' : '❌ ÉCHEC'}</span><br>
+                ${result.message}
+            `;
+            container.appendChild(div);
+        }
+
+        async function testDatabase() {
+            const results = document.getElementById('testResults');
+            
+            try {
+                // Simuler l'initialisation de la base de données
+                const SQL = await initSqlJs({
+                    locateFile: file => `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}`
+                });
+                
+                const db = new SQL.Database();
+                
+                // Créer une table de test
+                db.run(`
+                    CREATE TABLE test_table (
+                        id INTEGER PRIMARY KEY,
+                        name TEXT
+                    )
+                `);
+                
+                // Insérer des données de test
+                db.run("INSERT INTO test_table (name) VALUES ('Test 1'), ('Test 2')");
+                
+                // Lire les données
+                const stmt = db.prepare("SELECT * FROM test_table");
+                const rows = [];
+                while (stmt.step()) {
+                    rows.push(stmt.getAsObject());
+                }
+                stmt.free();
+                
+                addTestResult(
+                    'Test de base de données', 
+                    { 
+                        success: true, 
+                        message: `Base de données SQLite opérationnelle. ${rows.length} enregistrements de test créés.` 
+                    }, 
+                    results
+                );
+                
+                db.close();
+            } catch (error) {
+                addTestResult(
+                    'Test de base de données', 
+                    { 
+                        success: false, 
+                        message: `Erreur: ${error.message}` 
+                    }, 
+                    results
+                );
+            }
+        }
+
+        async function testFileLoading() {
+            const results = document.getElementById('testResults');
+            
+            try {
+                // Test de chargement des logos
+                const logoTest = new Promise((resolve) => {
+                    const img = new Image();
+                    img.onload = () => resolve(true);
+                    img.onerror = () => resolve(false);
+                    img.src = './app-logo.png';
+                });
+                
+                const logoLoaded = await logoTest;
+                
+                addTestResult(
+                    'Chargement des fichiers', 
+                    { 
+                        success: logoLoaded, 
+                        message: logoLoaded ? 'Logo principal chargé avec succès' : 'Impossible de charger le logo principal' 
+                    }, 
+                    results
+                );
+            } catch (error) {
+                addTestResult(
+                    'Chargement des fichiers', 
+                    { 
+                        success: false, 
+                        message: `Erreur: ${error.message}` 
+                    }, 
+                    results
+                );
+            }
+        }
+
+        function testValidation() {
+            const results = document.getElementById('testResults');
+            
+            // Test des expressions régulières de validation
+            const telephoneRegex = /^(\+243|0)[0-9]{9}$/;
+            
+            const telephoneTests = [
+                { value: '+243123456789', expected: true },
+                { value: '0123456789', expected: true },
+                { value: '123456789', expected: false },
+                { value: '+24312345678', expected: false }
+            ];
+            
+            let telephoneSuccess = telephoneTests.every(test => 
+                telephoneRegex.test(test.value) === test.expected
+            );
+            
+            addTestResult(
+                'Validation téléphone', 
+                { 
+                    success: telephoneSuccess, 
+                    message: telephoneSuccess ? 'Validation téléphone fonctionnelle' : 'Erreur validation téléphone' 
+                }, 
+                results
+            );
+            
+            addTestResult(
+                'Validation matricule', 
+                { 
+                    success: true, 
+                    message: 'Contrainte matricule supprimée - tous formats acceptés' 
+                }, 
+                results
+            );
+        }
+
+        function clearData() {
+            if (confirm('Êtes-vous sûr de vouloir effacer toutes les données de test ?')) {
+                localStorage.removeItem('professeurs_db');
+                alert('Données de test effacées avec succès !');
+                location.reload();
+            }
+        }
+
+        function displaySystemInfo() {
+            const info = document.getElementById('systemInfo');
+            
+            info.innerHTML = `
+                <div class="test-item">
+                    <strong>Navigateur:</strong> ${navigator.userAgent}<br>
+                    <strong>Langue:</strong> ${navigator.language}<br>
+                    <strong>Plateforme:</strong> ${navigator.platform}<br>
+                    <strong>Cookies activés:</strong> ${navigator.cookieEnabled ? 'Oui' : 'Non'}<br>
+                    <strong>En ligne:</strong> ${navigator.onLine ? 'Oui' : 'Non'}<br>
+                    <strong>LocalStorage:</strong> ${typeof(Storage) !== "undefined" ? 'Supporté' : 'Non supporté'}<br>
+                    <strong>Service Worker:</strong> ${'serviceWorker' in navigator ? 'Supporté' : 'Non supporté'}<br>
+                    <strong>Taille écran:</strong> ${screen.width}x${screen.height}<br>
+                    <strong>Taille fenêtre:</strong> ${window.innerWidth}x${window.innerHeight}
+                </div>
+            `;
+        }
+    </script>
+    
+    <!-- Chargement de SQL.js pour les tests -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/sql-wasm.js"></script>
+</body>
+</html>

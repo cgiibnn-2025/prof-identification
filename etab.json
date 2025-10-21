@@ -1,0 +1,987 @@
+[
+    {
+        "name": "Institut Supérieur d'Architecture et d'Urbanisme",
+        "shortname": "ISAU-KIN",
+        "path": "LOGO/ISAU-KIN.png"
+    },
+    {
+        "name": "Université de Kinshasa",
+        "shortname": "UNIKIN",
+        "path": "LOGO/UNIKIN.png"
+    },
+    {
+        "name": "Institut National de Bâtiment et Travaux Publics",
+        "shortname": "I.N.B.T.P",
+        "path": "LOGO/I.N.B.T.P.png"
+    },
+    {
+        "name": "Université des Sciences de l'Information et de la Communication",
+        "shortname": "UNISIC",
+        "path": "LOGO/UNISIC.png"
+    },
+    {
+        "name": "Université Pédagogique Nationale",
+        "shortname": "UPN",
+        "path": "LOGO/UPN.png"
+    },
+    {
+        "name": "HAUTE ECOLE DE COMMERCE DE KINSHASA",
+        "shortname": "HEC-KIN",
+        "path": "LOGO/HEC-KIN.png"
+    },
+    {
+        "name": "Institut supérieur de statistiques de Kinshasa",
+        "shortname": "ISS-KIN",
+        "path": "LOGO/ISS-KIN.png"
+    },
+    {
+        "name": "Institut Supérieur des Arts et Métiers",
+        "shortname": "ISAM",
+        "path": "LOGO/ISAM.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de la Gombe",
+        "shortname": "ISP-GOMBE",
+        "path": "LOGO/ISP-GOMBE.png"
+    },
+    {
+        "name": "ISTM KINSHASA",
+        "shortname": "ISTM-KIN",
+        "path": "LOGO/ISTM-KIN.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique Technique de Kinshasa",
+        "shortname": "ISPT-KIN",
+        "path": "LOGO/ISPT-KIN.png"
+    },
+    {
+        "name": "Académie des beaux-arts de Kinshasa",
+        "shortname": "ABA-KIN",
+        "path": "LOGO/ABA-KIN.png"
+    },
+    {
+        "name": "Institut National des Arts",
+        "shortname": "INA",
+        "path": "LOGO/INA.png"
+    },
+    {
+        "name": "Institut Supérieur de Techniques Appliquées de Kinshasa",
+        "shortname": "ISTA-KIN",
+        "path": "LOGO/ISTA-KIN.png"
+    },
+    {
+        "name": "Université de Goma",
+        "shortname": "UNIGOM",
+        "path": "LOGO/UNIGOM.png"
+    },
+    {
+        "name": "Université de Kisangani",
+        "shortname": "UNIKIS",
+        "path": "LOGO/UNIKIS.png"
+    },
+    {
+        "name": "Université de Lubumbashi",
+        "shortname": "UNILU",
+        "path": "LOGO/UNILU.png"
+    },
+    {
+        "name": "L'institut superieur d'enseignement technique de kikwit",
+        "shortname": "ISET-KKT",
+        "path": "LOGO/ISET-KKT.png"
+    },
+    {
+        "name": "Institut Supérieur de Développement Rural de Tshibashi/Kananga",
+        "shortname": "ISDR-T",
+        "path": "LOGO/ISDR-T.png"
+    },
+    {
+        "name": "Institut supérieur de commerce de Lubumbashi",
+        "shortname": "ISC-LUSHI",
+        "path": "LOGO/ISC-LUSHI.png"
+    },
+    {
+        "name": "Université de Mwene-Ditu",
+        "shortname": "UMD-MPITO",
+        "path": "LOGO/UMD-MPITO.png"
+    },
+    {
+        "name": "Université de Kindu",
+        "shortname": "UNIKI",
+        "path": "LOGO/UNIKI.png"
+    },
+    {
+        "name": "Université de Bandundu",
+        "shortname": "UNIBAND",
+        "path": "LOGO/UNIBAND.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales/Bukavu",
+        "shortname": "ISTM-BKV",
+        "path": "LOGO/ISTM-BKV.png"
+    },
+    {
+        "name": "Institut Supérieur de Développement Rural de Mbandaka",
+        "shortname": "ISDR-MBK",
+        "path": "LOGO/ISDR-MBK.png"
+    },
+    {
+        "name": "Institut supérieur de commerce de Ilebo",
+        "shortname": "ISC-ILEBO",
+        "path": "LOGO/ISC-ILEBO.png"
+    },
+    {
+        "name": "institut du bâtiment et des travaux publics de Matadi",
+        "shortname": "IBTP-MATADI",
+        "path": "LOGO/IBTP-MATADI.png"
+    },
+    {
+        "name": "Université Baptiste du Congo",
+        "shortname": "UNIBAC",
+        "path": "LOGO/UNIBAC.png"
+    },
+    {
+        "name": "Université de Kolwezi",
+        "shortname": "UNIKOL",
+        "path": "LOGO/UNIKOL.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales/Bandundu",
+        "shortname": "ISTM-BDD",
+        "path": "LOGO/ISTM-BDD.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Mbandaka",
+        "shortname": "ISP-MBKA",
+        "path": "LOGO/ISP-MBKA.png"
+    },
+    {
+        "name": "Institut supérieur de commerce de Beni",
+        "shortname": "ISC-BENI",
+        "path": "LOGO/ISC-BENI.png"
+    },
+    {
+        "name": "Université Adventiste de LUKANGA",
+        "shortname": "UNILUK",
+        "path": "LOGO/UNILUK.png"
+    },
+    {
+        "name": "Université Pédagogique de Kananga",
+        "shortname": "upkan",
+        "path": "LOGO/upkan.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales/Kindu",
+        "shortname": "ISTM-KINDU",
+        "path": "LOGO/ISTM-KINDU.png"
+    },
+    {
+        "name": "institut du bâtiment et des travaux publics de Kisangani",
+        "shortname": "IBTP-KIS",
+        "path": "LOGO/IBTP-KIS.png"
+    },
+    {
+        "name": "Institut supérieur de commerce de Bandundu",
+        "shortname": "ISC-BDD",
+        "path": "LOGO/ISC-BDD.png"
+    },
+    {
+        "name": "institut supérieur pédagogique de Matadi",
+        "shortname": "ISP-MATADI",
+        "path": "LOGO/ISP-MATADI.png"
+    },
+    {
+        "name": "Université de Kikwit",
+        "shortname": "UNIKIK",
+        "path": "LOGO/UNIKIK.png"
+    },
+    {
+        "name": "UKV-BOMA",
+        "shortname": "UKV-BOMA",
+        "path": "LOGO/UKV-BOMA.png"
+    },
+    {
+        "name": "Institut Supérieur de Technique Médicale de Kalenda",
+        "shortname": "ISTM-KLD",
+        "path": "LOGO/ISTM-KLD.png"
+    },
+    {
+        "name": "Institut supérieur pédagogique de Beni",
+        "shortname": "ISP-BENI",
+        "path": "LOGO/ISP-BENI.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales de Béni",
+        "shortname": "ISTM-BENI",
+        "path": "LOGO/ISTM-BENI.png"
+    },
+    {
+        "name": "Institut Supérieur de Développement Rural des Grands-Lacs (ISDR-GL)",
+        "shortname": "ISDR-Goma",
+        "path": "LOGO/ISDR-Goma.png"
+    },
+    {
+        "name": "Université Shalom de Bunia",
+        "shortname": "USB",
+        "path": "LOGO/USB.png"
+    },
+    {
+        "name": "Université Officielle de Ruwenzori",
+        "shortname": "UOR",
+        "path": "LOGO/UOR.png"
+    },
+    {
+        "name": "ISAM-LUBERO",
+        "shortname": "ISAM-LUBERO",
+        "path": "LOGO/ISAM-LUBERO.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DES TECHNIQUES MEDICALES DE WALIKALE",
+        "shortname": "ISTM-WALIKALE",
+        "path": "LOGO/ISTM-WALIKALE.png"
+    },
+    {
+        "name": "Université Libre des Pays des Grands",
+        "shortname": "ULPG",
+        "path": "LOGO/Université Libre des Pays des Grands.png"
+    },
+    {
+        "name": "Université Evangélique pour le Progrès en Ituri",
+        "shortname": "UEPI",
+        "path": "LOGO/UEPI.png"
+    },
+    {
+        "name": "UNIVERSITE DU CEPROMAD DE GOMA",
+        "shortname": "UNIC-GOMA",
+        "path": "LOGO/UNIC-GOMA.png"
+    },
+    {
+        "name": "Université de Bunia",
+        "shortname": "UNIBU",
+        "path": "LOGO/UNIBU.png"
+    },
+    {
+        "name": "UNIVERSITE ANGLICANE DU CONGO",
+        "shortname": "UAC",
+        "path": "LOGO/UAC.png"
+    },
+    {
+        "name": "Université Adventiste de Goma",
+        "shortname": "UAGO",
+        "path": "LOGO/UAGO.png"
+    },
+    {
+        "name": "UNIVERSIE CATHOLIQUE LA SAPIENTIA DE GOMA",
+        "shortname": "UCS-GOMA",
+        "path": "LOGO/UCS-GOMA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR TECHNIQUE ET SOCIAL",
+        "shortname": "ISTS-GOMA",
+        "path": "LOGO/ISTS-GOMA.png"
+    },
+    {
+        "name": "Institut Supérieur Technique Adventiste de Goma",
+        "shortname": "ISTAGO",
+        "path": "LOGO/ISTAGO.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR PEDAGOGIQUE DE NYIRAGONGO",
+        "shortname": "ISP-NYIRAGONGO",
+        "path": "LOGO/ISP-NYIRAGONGO.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de MUHANGI",
+        "shortname": "ISP-MUHANGI",
+        "path": "LOGO/ISP-MUHANGI.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Goma",
+        "shortname": "ISP-GOMA",
+        "path": "LOGO/ISP-GOMA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR PEDAGOGIQUE DE GETY",
+        "shortname": "ISP-GETY",
+        "path": "LOGO/ISP-GETY.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR PEDAGOGIQUE DE BUNIA",
+        "shortname": "INSTITUT SUPERIEUR PEDAGOGIQUE DE BUNIA",
+        "path": "LOGO/INSTITUT SUPERIEUR PEDAGOGIQUE DE BUNIA.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique CECA 20 BUNIA",
+        "shortname": "ISP-CECA20-BUNIA",
+        "path": "LOGO/ISP-CECA20-BUNIA.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogie de Walikale",
+        "shortname": "ISP-WALIKALE",
+        "path": "LOGO/ISP-WALIKALE.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales de Nyankunde",
+        "shortname": "ISTM-NYAKUNDE",
+        "path": "LOGO/ISTM-NYAKUNDE.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DES TECHNIQUES MEDICALES DE MASISI",
+        "shortname": "ISTM-MASISI",
+        "path": "LOGO/ISTM-MASISI.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DES TECHNIQUES MEDICALES DE BUNIA",
+        "shortname": "ISTM-BUNIA",
+        "path": "LOGO/ISTM-BUNIA.png"
+    },
+    {
+        "name": "Institut supérieur des techniques de gestion des affaires de goma",
+        "shortname": "ISTGA",
+        "path": "LOGO/ISTGA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DES SCIENCES INFORMATIQUES ET DE GESTION DE BUNIA",
+        "shortname": "ISSIGE-BUNIA",
+        "path": "LOGO/ISSIGE-BUNIA.png"
+    },
+    {
+        "name": "Institut Supérieur d'Enseignement des Techniques Médicales-Virunga",
+        "shortname": "ISETM-VIRUNGA",
+        "path": "LOGO/ISETM-VIRUNGA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE TOURISME DE GOMA",
+        "shortname": "ISTOU-GOMA",
+        "path": "LOGO/ISTOU-GOMA.png"
+    },
+    {
+        "name": "Institut Supérieur de Statistique et de Nouvelles Technologies",
+        "shortname": "ISSNT-GOMA",
+        "path": "LOGO/ISSNT-GOMA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE SCIENCES RELIGIEUSES JOSEPH MUKASA BUNIA",
+        "shortname": "ISLG-BUNIA",
+        "path": "LOGO/ISLG-BUNIA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE MANAGEMENT DES GRANDS LACS GOMA",
+        "shortname": "ISMGL-GOMA",
+        "path": "LOGO/ISMGL-GOMA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE DEVELOPPEMENT RURAL DE BUNIA",
+        "shortname": "ISDR-BUNIA",
+        "path": "LOGO/ISDR-BUNIA.png"
+    },
+    {
+        "name": "Institut Supérieur de Développement et d'Entrepreneuriat de Kyavirimu",
+        "shortname": "ISDKY",
+        "path": "LOGO/ISDKY.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE DE GOMA",
+        "shortname": "ISC-GOMA",
+        "path": "LOGO/ISC-GOMA.png"
+    },
+    {
+        "name": "INSTITUT SUPÉRIEUR D’ENVIRONNEMENT SOLIDAIRE ET DE DÉVELOPPEMENT DURABLE",
+        "shortname": "ISESOD-GOMA",
+        "path": "LOGO/ISESOD-GOMA.png"
+    },
+    {
+        "name": "Institut du Bâtiment et Travaux Publics de Bunia",
+        "shortname": "IBTP-BUNIA",
+        "path": "LOGO/IBTP-BUNIA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE TECHNIQUE MEDIALE DE GOMA",
+        "shortname": "ISTM-GOMA",
+        "path": "LOGO/ISTM-GOMA.png"
+    },
+    {
+        "name": "Université Shalom Bunia",
+        "shortname": "USB-BUNIA",
+        "path": "LOGO/USB-BUNIA.png"
+    },
+    {
+        "name": "Université Officielle Ruwenzori",
+        "shortname": "U.O.R",
+        "path": "LOGO/U.O.R.png"
+    },
+    {
+        "name": "Université Shalom",
+        "shortname": "U.S.B-BUNIA",
+        "path": "LOGO/U.S.B-BUNIA.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Appliquées de Ndoluma à Lubero",
+        "shortname": "ISTA Ndoluma",
+        "path": "LOGO/ISTA Ndoluma.png"
+    },
+    {
+        "name": "Université Catholique du graben de Butembo",
+        "shortname": "UCG Butembo",
+        "path": "LOGO/UCG Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur de Commerce de Butembo",
+        "shortname": "ISC-BUTEMBO",
+        "path": "LOGO/ISC-BUTEMBO.png"
+    },
+    {
+        "name": "Université Libre de Développement de Butembo",
+        "shortname": "ULD Butembo",
+        "path": "LOGO/ULD Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales Loyola",
+        "shortname": "ISTM Loyola",
+        "path": "LOGO/ISTM Loyola.png"
+    },
+    {
+        "name": "Institut du Batiment et Travaux Publics Butembo",
+        "shortname": "IBTP Butembo",
+        "path": "LOGO/IBTP Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales de Lukanga",
+        "shortname": "ISTM Lukanga",
+        "path": "LOGO/ISTM Lukanga.png"
+    },
+    {
+        "name": "Institut Supérieur Technique de Lukanga",
+        "shortname": "ISTA Lukanga",
+        "path": "LOGO/ISTA Lukanga.png"
+    },
+    {
+        "name": "Université Sainte Croix de Mulo",
+        "shortname": "USCM Mulo",
+        "path": "LOGO/USCM Mulo.png"
+    },
+    {
+        "name": "Université de l’Assomption au Congo de Butembo",
+        "shortname": "UAC Butembo",
+        "path": "LOGO/UAC Butembo.png"
+    },
+    {
+        "name": "Faculté Africaines Bakhita",
+        "shortname": "FAB",
+        "path": "LOGO/FAB.png"
+    },
+    {
+        "name": "Institut Supérieur de Développement Rural de Kitsombiro",
+        "shortname": "ISDR Kitsumbiro",
+        "path": "LOGO/ISDR Kitsumbiro.png"
+    },
+    {
+        "name": "Institut Supérieur d Etudes Agronomiques Vétérinaires et Forestières de Butembo",
+        "shortname": "ISEAVF Butembo",
+        "path": "LOGO/ISEAVF Butembo.png"
+    },
+    {
+        "name": "Université Evangélique de la Mission en Afrique de Butembo",
+        "shortname": "UEMA Butembo",
+        "path": "LOGO/UEMA Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique et Techniques de Muhangi",
+        "shortname": "ISPT Muhangi",
+        "path": "LOGO/ISPT Muhangi.png"
+    },
+    {
+        "name": "Université Libre des Pays des Grands Lacs de Butembo",
+        "shortname": "ULPGL Butembo",
+        "path": "LOGO/ULPGL Butembo.png"
+    },
+    {
+        "name": "2 Université du CEPROMAD de Butembo",
+        "shortname": "UNIC Butembo",
+        "path": "LOGO/UNIC Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Kirumba",
+        "shortname": "ISP Kirumba",
+        "path": "LOGO/ISP Kirumba.png"
+    },
+    {
+        "name": "Institut Supérieur de Chimie Appliquée de Butembo",
+        "shortname": "ISCA Butembo",
+        "path": "LOGO/ISCA Butembo.png"
+    },
+    {
+        "name": "Université Diviba Gloria de Butembo",
+        "shortname": "UDGB Butembo",
+        "path": "LOGO/UDGB Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales de Kyondo",
+        "shortname": "ISTM Kyondo",
+        "path": "LOGO/ISTM Kyondo.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Masereka",
+        "shortname": "ISP Masereka",
+        "path": "LOGO/ISP Masereka.png"
+    },
+    {
+        "name": "Université Technologique Africaine de Butungera",
+        "shortname": "UTAB",
+        "path": "LOGO/UTAB.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Appliquées de Butembo",
+        "shortname": "ISTA Butembo",
+        "path": "LOGO/ISTA Butembo.png"
+    },
+    {
+        "name": "Institut Supérieur de Développement Rural de Kanyabayonga",
+        "shortname": "ISDR Kanyabayonga",
+        "path": "LOGO/ISDR Kanyabayonga.png"
+    },
+    {
+        "name": "2 Institut Supérieur des Techniques Médicales de Kayna",
+        "shortname": "STM Kayna",
+        "path": "LOGO/STM Kayna.png"
+    },
+    {
+        "name": "Institut Supérieur d Etudes Agronomiques Veterinaires et Forestieres de Kirumba",
+        "shortname": "ISEAVF Kirumba",
+        "path": "LOGO/ISEAVF Kirumba.png"
+    },
+    {
+        "name": "Université de Conservation de la Nature et de développement de Kasugho",
+        "shortname": "UCNDK",
+        "path": "LOGO/UCNDK.png"
+    },
+    {
+        "name": "Université de Développement au Congo à Muhangi",
+        "shortname": "UNIDEC Muhangi",
+        "path": "LOGO/UNIDEC Muhangi.png"
+    },
+    {
+        "name": "Université Islamique du Congo à Butembo",
+        "shortname": "UIC Butemb",
+        "path": "LOGO/UIC Butemb.png"
+    },
+    {
+        "name": "Institut Supérieur Technique d’Aquaculture de Pêche et de Tourisme de Kyavinyonge",
+        "shortname": "ISTAPT Kyavinyonge",
+        "path": "LOGO/ISTAPT Kyavinyonge.png"
+    },
+    {
+        "name": "Université Officielle de Semuliki",
+        "shortname": "UOS",
+        "path": "LOGO/UOS.png"
+    },
+    {
+        "name": "Institut Supérieur de Commerce de Bukavu",
+        "shortname": "ISC-BUKAVU",
+        "path": "LOGO/ISC-BUKAVU.png"
+    },
+    {
+        "name": "Université Officiel de Bukavu",
+        "shortname": "UOB",
+        "path": "LOGO/UOB.png"
+    },
+    {
+        "name": "6 Institut Supérieur de Développement Rural de Beni",
+        "shortname": "ISDR Beni",
+        "path": "LOGO/ISDR Beni.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique d’ Oicha",
+        "shortname": "ISP Oicha",
+        "path": "LOGO/ISP Oicha.png"
+    },
+    {
+        "name": "Université Pic Margeurite de Mwenda",
+        "shortname": "UPM",
+        "path": "LOGO/UPM.png"
+    },
+    {
+        "name": "Université Chrétienne Bilingue du Congo de Beni",
+        "shortname": "UCBC Beni",
+        "path": "LOGO/UCBC Beni.png"
+    },
+    {
+        "name": "Université de l’Assomption du Congo de Beni",
+        "shortname": "UAC Beni",
+        "path": "LOGO/UAC Beni.png"
+    },
+    {
+        "name": "Université Evangélique de Beni",
+        "shortname": "UEB Beni",
+        "path": "LOGO/UEB Beni.png"
+    },
+    {
+        "name": "Université Anglicane en afrique Centrale à Beni",
+        "shortname": "UAAC Beni",
+        "path": "LOGO/UAAC Beni.png"
+    },
+    {
+        "name": "Université du CEPROMAD de Beni",
+        "shortname": "UNIC Beni",
+        "path": "LOGO/UNIC Beni.png"
+    },
+    {
+        "name": "6 Institut Supérieur des Techniques Médicales d’ Oicha",
+        "shortname": "ISTM Oicha",
+        "path": "LOGO/ISTM Oicha.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Appliquées et de Développement de Beni",
+        "shortname": "ISTAD Beni",
+        "path": "LOGO/ISTAD Beni.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques de Développement de Kasindi",
+        "shortname": "ISTD Kasindi",
+        "path": "LOGO/ISTD Kasindi.png"
+    },
+    {
+        "name": "Institut Supérieur des Sciences Techniques et de Développement Durable de Mbau",
+        "shortname": "ISSTDD Mbau",
+        "path": "LOGO/ISSTDD Mbau.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques de Gestion et de Développement de Kasindi",
+        "shortname": "ISTGD Kasindi",
+        "path": "LOGO/ISTGD Kasindi.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales de Mangina",
+        "shortname": "ISTM Mangina",
+        "path": "LOGO/ISTM Mangina.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Ruwenzori",
+        "shortname": "ISP Ruw",
+        "path": "LOGO/ISP Ruw.png"
+    },
+    {
+        "name": "Institut Supérieur du Bassin du Nil",
+        "shortname": "ISBN de Beni",
+        "path": "LOGO/ISBN de Beni.png"
+    },
+    {
+        "name": "Institut Supérieur d Etudes Agronomiques Veterinaires et Forestieres de Cantine",
+        "shortname": "ISEAVF Cantine",
+        "path": "LOGO/ISEAVF Cantine.png"
+    },
+    {
+        "name": "Universite d’ Oicha",
+        "shortname": "Unio",
+        "path": "LOGO/Unio.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE DE BULUNGU",
+        "shortname": "ISC-BULUNGU",
+        "path": "LOGO/ISC-BULUNGU.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE D'ISIRO",
+        "shortname": "ISC-ISIRO",
+        "path": "LOGO/ISC-ISIRO.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE DE KINDU",
+        "shortname": "ISC-KINDU",
+        "path": "LOGO/ISC-KINDU.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE DE TSHIKAPA",
+        "shortname": "ISC-TSHIKAPA",
+        "path": "LOGO/ISC-TSHIKAPA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE DE LODJA",
+        "shortname": "ISC-LODJA",
+        "path": "LOGO/ISC-LODJA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE DE KISANGANI",
+        "shortname": "ISC-KISANGANI",
+        "path": "LOGO/ISC-KISANGANI.png"
+    },
+    {
+        "name": "Université des Martyrs du Congo",
+        "shortname": "UNIM-RDC",
+        "path": "LOGO/UNIM-RDC.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DES TECHNIQUES APPLIQUÉES DE GOMA",
+        "shortname": "ISTA-GOMA",
+        "path": "LOGO/ISTA-GOMA.png"
+    },
+    {
+        "name": "Université Libre des Pays des Grands Lacs de Goma",
+        "shortname": "ULPGL-GOMA",
+        "path": "LOGO/ULPGL-GOMA.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de MACHUMBI",
+        "shortname": "ISP-MACHUMBI",
+        "path": "LOGO/ISP-MACHUMBI.png"
+    },
+    {
+        "name": "UNIVERSITE DE DJUMA",
+        "shortname": "UNIDJU",
+        "path": "LOGO/UNIDJU.png"
+    },
+    {
+        "name": "UNIVERSITE DE GBADOLITE",
+        "shortname": "UNIGBA",
+        "path": "LOGO/UNIGBA.png"
+    },
+    {
+        "name": "UNIVERSITE DE KABINDA",
+        "shortname": "UNIKA",
+        "path": "LOGO/UNIKA.png"
+    },
+    {
+        "name": "UNIVERSITE DE KALEMIE",
+        "shortname": "UNIKAL",
+        "path": "LOGO/UNIKAL.png"
+    },
+    {
+        "name": "UNIVERSITE DE KAMINA",
+        "shortname": "UNIKAM",
+        "path": "LOGO/UNIKAM.png"
+    },
+    {
+        "name": "UNIVERSITE DE KANANGA",
+        "shortname": "UNIKAN",
+        "path": "LOGO/UNIKAN.png"
+    },
+    {
+        "name": "UNIVERSITE DU KWANGO",
+        "shortname": "UNIKWANGO",
+        "path": "LOGO/UNIKWANGO.png"
+    },
+    {
+        "name": "UNIVERSITE DE LIKASI",
+        "shortname": "UNILIK",
+        "path": "LOGO/UNILIK.png"
+    },
+    {
+        "name": "UNIVERSITE DE LISALA",
+        "shortname": "UNILIS",
+        "path": "LOGO/UNILIS.png"
+    },
+    {
+        "name": "UNIVERSITE NOTRE DAME DE LOMAMI",
+        "shortname": "UNILO",
+        "path": "LOGO/UNILO.png"
+    },
+    {
+        "name": "UNIVERSITE DE LODJA",
+        "shortname": "UNILOD",
+        "path": "LOGO/UNILOD.png"
+    },
+    {
+        "name": "UNIVERSITE DE LUSAMBO",
+        "shortname": "UNILUS",
+        "path": "LOGO/UNILUS.png"
+    },
+    {
+        "name": "UNIVERSITE DE MALEMB-NKULU",
+        "shortname": "UNIMALEMBANKULU",
+        "path": "LOGO/UNIMALEMBANKULU.png"
+    },
+    {
+        "name": "UNIVERSITE DE MBANDAKA",
+        "shortname": "UNIMBA",
+        "path": "LOGO/UNIMBA.png"
+    },
+    {
+        "name": "UNIVERSITE DE MWENE–DITU",
+        "shortname": "UNIMWD",
+        "path": "LOGO/UNIMWD.png"
+    },
+    {
+        "name": "UNIVERSITE NOTRE DAME DE TSHUMBE",
+        "shortname": "UNITSHU",
+        "path": "LOGO/UNITSHU.png"
+    },
+    {
+        "name": "UNIVERSITE OFFICIELLE DE MBUJI-MAYI",
+        "shortname": "UOM",
+        "path": "LOGO/UOM.png"
+    },
+    {
+        "name": "UNIVERSITE OFFICIELLE DE SEMULIKI DE BENI",
+        "shortname": "UOS- BENI",
+        "path": "LOGO/UOS- BENI.png"
+    },
+    {
+        "name": "UNIVERSITE OFFICIELLE YABAONDO",
+        "shortname": "UOY",
+        "path": "LOGO/UOY.png"
+    },
+    {
+        "name": "UNIVERSITE PATRICE EMERY LUMUMBA DE WEMBO-NYAMA",
+        "shortname": "UPEL-WEMBO-NYAMA",
+        "path": "LOGO/UPEL-WEMBO-NYAMA.png"
+    },
+    {
+        "name": "UNIVERSITE DES SCIENCES ET DE TECHNOLOGIES DE LODJA",
+        "shortname": "USTC-LODJA",
+        "path": "LOGO/USTC-LODJA.png"
+    },
+    {
+        "name": "INSTITUT FACULTAIRE DES SCIENCES AGRONOMIQUES DE YANGAMBI",
+        "shortname": "IFA-YANGAMBI",
+        "path": "LOGO/IFA-YANGAMBI.png"
+    },
+    {
+        "name": "CENTRE UNIVERSITAIRE DE LA PAIX DE BUKAVU",
+        "shortname": "CUP-BUKAVU",
+        "path": "LOGO/CUP-BUKAVU.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE COMMERCE  UVIRA",
+        "shortname": "ISC UVIRA",
+        "path": "LOGO/ISC UVIRA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE DEVELOPPEMENT RURAL DE FIZI",
+        "shortname": "ISDR-FIZI",
+        "path": "LOGO/ISDR-FIZI.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE DEVLOPPEMENT RURAL BUKAVU",
+        "shortname": "ISDR BUKAVU",
+        "path": "LOGO/ISDR BUKAVU.png"
+    },
+    {
+        "name": "ISDR  KAZIBA",
+        "shortname": "ISDR  KAZIBA",
+        "path": "LOGO/ISDR  KAZIBA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE DEVLOPPEMENT RURAL  WALIKALE",
+        "shortname": "ISDR WALIKALE",
+        "path": "LOGO/ISDR WALIKALE.png"
+    },
+    {
+        "name": "? INSTITUT SUPERIEUR PEDAGOGIQUE DE KAZIBA",
+        "shortname": "ISP  DE KAZIBA",
+        "path": "LOGO/ISP  DE KAZIBA.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR  PEDAGOGIQUE  KIKWIT",
+        "shortname": "ISP-KIKWIT",
+        "path": "LOGO/ISP-KIKWIT.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR  PEDAGOGIQUE  MBANZA-NGUNGU",
+        "shortname": "ISP  MBANZA-NGUNGU",
+        "path": "LOGO/ISP  MBANZA-NGUNGU.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR D'IDJWI",
+        "shortname": "ISP IDJWI",
+        "path": "LOGO/ISP IDJWI.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DE PASTORALE FAMILIALE DE BUKAVU",
+        "shortname": "ISPF-BUKAVU",
+        "path": "LOGO/ISPF-BUKAVU.png"
+    },
+    {
+        "name": "INSTITUT SEPERIUR PEDAGOGIQUE ET TECHNIQUE BUKAVU",
+        "shortname": "ISPT BUKAVU",
+        "path": "LOGO/ISPT BUKAVU.png"
+    },
+    {
+        "name": "Institut Supérieur d'Etudes Commerciales et Financières de Bukavu",
+        "shortname": "ISECOF-BUKAVU",
+        "path": "LOGO/ISECOF-BUKAVU.png"
+    },
+    {
+        "name": "ISC Matadi",
+        "shortname": "ISC Matadi",
+        "path": "LOGO/ISC Matadi.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales d'ILEBO",
+        "shortname": "ISTM-ILEBO",
+        "path": "LOGO/ISTM-ILEBO.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique d'ILEBO",
+        "shortname": "ISP-ILEBO",
+        "path": "LOGO/ISP-ILEBO.png"
+    },
+    {
+        "name": "INSTITUT SUPERIEUR DES TECHNIQUES MEDICAIES NYANGEZI",
+        "shortname": "ISTM-NYANGEZI",
+        "path": "LOGO/ISTM-NYANGEZI.png"
+    },
+    {
+        "name": "Université Bilingue du Congo-BUKAVU",
+        "shortname": "UBC-BUKAVU",
+        "path": "LOGO/UBC-BUKAVU.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques de Développement de Mulungu",
+        "shortname": "ISTD-MULUNGU",
+        "path": "LOGO/ISTD-MULUNGU.png"
+    },
+    {
+        "name": "CENTRE TINIVERSITAIRE DE MINEMBWE",
+        "shortname": "CUM",
+        "path": "LOGO/CUM.png"
+    },
+    {
+        "name": "2t INSTITUT SUPERIEUR DES TECHNIQUES MEDICALES DE KANYAMULANDE",
+        "shortname": "ISTM-KANYAMULANDE",
+        "path": "LOGO/ISTM-KANYAMULANDE.png"
+    },
+    {
+        "name": "Université de KAZIBA",
+        "shortname": "UNIKAZ",
+        "path": "LOGO/UNIKAZ.png"
+    },
+    {
+        "name": "Université Libre de Grands Lacs de Bukavu",
+        "shortname": "ULGL-BKV",
+        "path": "LOGO/ULGL-BKV.png"
+    },
+    {
+        "name": "IT Philosophat Isidore Bakanja",
+        "shortname": "IT PIB",
+        "path": "LOGO/IT PIB.png"
+    },
+    {
+        "name": "UNIVERSITE DU CINQUANTENAIRE DE LWIRO",
+        "shortname": "UNI50-LWIRO",
+        "path": "LOGO/UNI50-LWIRO.png"
+    },
+    {
+        "name": "Université Evangélique en Afrique",
+        "shortname": "uea-bukavu",
+        "path": "LOGO/uea-bukavu.png"
+    },
+    {
+        "name": "Université d'Excellence pour l'Afrique des Grands Lacs",
+        "shortname": "UEAGL",
+        "path": "LOGO/UEAGL.png"
+    },
+    {
+        "name": "ISTA-KOLWEZI",
+        "shortname": "ISTA-KOLWEZI",
+        "path": "LOGO/ISTA-KOLWEZI.png"
+    },
+    {
+        "name": "Institut Supérieur des Techniques Médicales d'ISIRO",
+        "shortname": "ISTM-ISIRO",
+        "path": "LOGO/ISTM-ISIRO.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Kirotche",
+        "shortname": "ISP-KIROTCHE",
+        "path": "LOGO/ISP-KIROTCHE.png"
+    }
+]

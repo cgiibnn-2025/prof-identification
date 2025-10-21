@@ -1,0 +1,59 @@
+{
+  "name": "ESU-RSI - Personnel Académique",
+  "short_name": "ESU-RSI",
+  "description": "Application de gestion des renseignements du personnel académique de l'ESU-RSI",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "./",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "./app-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "./app-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "categories": ["education", "productivity", "utilities"],
+  "screenshots": [
+    {
+      "src": "./screenshots/desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Interface bureau de l'application"
+    },
+    {
+      "src": "./screenshots/mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Interface mobile de l'application"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Nouveau professeur",
+      "short_name": "Nouveau",
+      "description": "Ajouter un nouveau professeur",
+      "url": "./index.html#new",
+      "icons": [{ "src": "./app-logo.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Liste des professeurs",
+      "short_name": "Liste",
+      "description": "Voir tous les professeurs",
+      "url": "./index.html#list",
+      "icons": [{ "src": "./app-logo.png", "sizes": "96x96" }]
+    }
+  ]
+}

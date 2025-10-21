@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide d'utilisation - ESU-RSI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --light-gray: #f8fafc;
+            --medium-gray: #e2e8f0;
+            --dark-gray: #475569;
+            --white: #ffffff;
+            --border-radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: var(--dark-gray);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .content {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin: 30px 0 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            margin: 20px 0 10px;
+        }
+
+        .subtitle {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: var(--light-gray);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-list {
+            background: var(--light-gray);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+
+        .step-list ol {
+            margin-left: 20px;
+        }
+
+        .step-list li {
+            margin: 10px 0;
+            padding: 10px;
+            background: var(--white);
+            border-radius: 5px;
+            border-left: 3px solid var(--success-color);
+        }
+
+        .validation-rules {
+            background: #fef3c7;
+            border: 1px solid #fde68a;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 20px 0;
+        }
+
+        .validation-rules h4 {
+            color: var(--warning-color);
+            margin-bottom: 15px;
+        }
+
+        .validation-rules ul {
+            margin-left: 20px;
+        }
+
+        .validation-rules li {
+            margin: 8px 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+
+        .btn-secondary:hover {
+            background: #475569;
+        }
+
+        .actions {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: var(--light-gray);
+            border-radius: var(--border-radius);
+        }
+
+        .tech-specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .tech-spec {
+            background: var(--light-gray);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .tech-spec .icon {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="app-logo.png" alt="ESU-RSI Logo" class="logo">
+            <h1>ESU-RSI</h1>
+            <p class="subtitle">Application de gestion du personnel académique</p>
+        </div>
+
+        <div class="content">
+            <h2><i class="fas fa-info-circle"></i> Présentation</h2>
+            <p>
+                L'application ESU-RSI est un système moderne de gestion des renseignements du personnel académique 
+                de l'Enseignement Supérieur et Universitaire. Elle permet l'enregistrement, la consultation et la 
+                gestion complète des informations des professeurs et du personnel académique.
+            </p>
+
+            <h2><i class="fas fa-star"></i> Fonctionnalités principales</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><i class="fas fa-user-plus"></i> Inscription complète</h4>
+                    <p>Formulaire détaillé pour l'enregistrement de tous les renseignements personnels et académiques.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-university"></i> Gestion des universités</h4>
+                    <p>Base de données complète de toutes les universités de RDC avec leurs logos officiels.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-search"></i> Recherche avancée</h4>
+                    <p>Recherche rapide par nom, matricule ou numéro de téléphone avec filtres intelligents.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-file-upload"></i> Gestion des documents</h4>
+                    <p>Upload et stockage sécurisé des photos, diplômes, thèses et autres documents importants.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-mobile-alt"></i> Design responsive</h4>
+                    <p>Interface adaptée à tous les appareils : ordinateurs, tablettes et smartphones.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-database"></i> Stockage local</h4>
+                    <p>Base de données SQLite locale pour un fonctionnement rapide et sécurisé.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-user-shield"></i> Administration</h4>
+                    <p>Interface d'administration avec contrôle d'accès et gestion des données.</p>
+                </div>
+            </div>
+
+            <h2><i class="fas fa-play-circle"></i> Comment utiliser l'application</h2>
+            <div class="step-list">
+                <h4>👥 Pour tous les utilisateurs (Enregistrement public) :</h4>
+                <ol>
+                    <li><strong>Accéder à l'application :</strong> Ouvrez le navigateur et naviguez vers l'application</li>
+                    <li><strong>Remplir le formulaire :</strong> Complétez tous les champs marqués d'un astérisque (*)</li>
+                    <li><strong>Sélectionner l'université :</strong> Choisissez l'université d'attache dans la liste déroulante</li>
+                    <li><strong>Joindre les documents :</strong> Uploadez la photo, les diplômes et la thèse</li>
+                    <li><strong>Vérifier les informations :</strong> Relisez attentivement toutes les données saisies</li>
+                    <li><strong>Confirmer et enregistrer :</strong> Cochez la case de confirmation et cliquez sur "Enregistrer"</li>
+                </ol>
+                
+                <h4>🔐 Pour les administrateurs (Consultation des données) :</h4>
+                <ol>
+                    <li><strong>Se connecter :</strong> Cliquez sur le bouton "Admin" en haut à droite</li>
+                    <li><strong>Saisir les identifiants :</strong> Utilisez admin / admin123 (par défaut)</li>
+                    <li><strong>Consulter les données :</strong> Visualisez tous les professeurs enregistrés</li>
+                    <li><strong>Rechercher :</strong> Utilisez la fonction de recherche pour filtrer les résultats</li>
+                    <li><strong>Gérer les données :</strong> Consultez les détails et supprimez si nécessaire</li>
+                </ol>
+            </div>
+
+            <h2><i class="fas fa-exclamation-triangle"></i> Règles de validation</h2>
+            <div class="validation-rules">
+                <h4>Formats requis :</h4>
+                <ul>
+                    <li><strong>Matricule ESU :</strong> Tout format accepté (plus de contrainte)</li>
+                    <li><strong>Téléphone :</strong> Format congolais (+243123456789 ou 0123456789)</li>
+                    <li><strong>Photo d'identité :</strong> JPG, PNG ou JPEG, maximum 8MB</li>
+                    <li><strong>Thèse :</strong> Fichier PDF uniquement</li>
+                    <li><strong>Autres documents :</strong> PDF, JPG, PNG ou JPEG</li>
+                    <li><strong>Commentaire :</strong> Maximum 50 caractères</li>
+                </ul>
+            </div>
+
+            <h2><i class="fas fa-user-shield"></i> Administration</h2>
+            <p>
+                L'application dispose d'un <strong>système de contrôle d'accès à deux niveaux</strong> :
+            </p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4><i class="fas fa-users"></i> Accès Public</h4>
+                    <p><strong>Formulaire d'enregistrement :</strong> Accessible à tous pour l'inscription des professeurs.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h4><i class="fas fa-lock"></i> Accès Restreint</h4>
+                    <p><strong>Consultation des données :</strong> Réservée exclusivement aux administrateurs connectés.</p>
+                </div>
+            </div>
+            
+            <ul style="margin: 15px 0 15px 30px;">
+                <li><strong>Enregistrement :</strong> Tout utilisateur peut s'inscrire via le formulaire</li>
+                <li><strong>Consultation :</strong> Seuls les administrateurs peuvent voir les données</li>
+                <li><strong>Recherche :</strong> Fonction réservée aux administrateurs</li>
+                <li><strong>Gestion :</strong> Suppression et modification par les administrateurs uniquement</li>
+            </ul>
+            
+            <div class="validation-rules">
+                <h4>Accès administrateur :</h4>
+                <ul>
+                    <li><strong>Nom d'utilisateur par défaut :</strong> admin</li>
+                    <li><strong>Mot de passe par défaut :</strong> admin123</li>
+                    <li><strong>Recommendation :</strong> Changez le mot de passe après la première connexion</li>
+                </ul>
+            </div>
+
+            <h2><i class="fas fa-cogs"></i> Spécifications techniques</h2>
+            <div class="tech-specs">
+                <div class="tech-spec">
+                    <div class="icon"><i class="fab fa-html5"></i></div>
+                    <h4>HTML5</h4>
+                    <p>Structure moderne</p>
+                </div>
+                
+                <div class="tech-spec">
+                    <div class="icon"><i class="fab fa-css3-alt"></i></div>
+                    <h4>CSS3</h4>
+                    <p>Design responsive</p>
+                </div>
+                
+                <div class="tech-spec">
+                    <div class="icon"><i class="fab fa-js-square"></i></div>
+                    <h4>JavaScript</h4>
+                    <p>ES6+ moderne</p>
+                </div>
+                
+                <div class="tech-spec">
+                    <div class="icon"><i class="fas fa-database"></i></div>
+                    <h4>SQLite</h4>
+                    <p>Base de données</p>
+                </div>
+            </div>
+
+            <h2><i class="fas fa-question-circle"></i> Support et aide</h2>
+            <p>
+                En cas de problème ou de question concernant l'utilisation de l'application :
+            </p>
+            <ul style="margin: 15px 0 15px 30px;">
+                <li>Vérifiez que votre navigateur est à jour (Chrome 60+, Firefox 55+, Safari 12+)</li>
+                <li>Assurez-vous d'avoir une connexion internet stable pour le premier chargement</li>
+                <li>Vérifiez que JavaScript est activé dans votre navigateur</li>
+                <li>Consultez la page de test pour diagnostiquer les problèmes techniques</li>
+            </ul>
+
+            <div class="actions">
+                <h3>Prêt à commencer ?</h3>
+                <a href="index.html" class="btn">
+                    <i class="fas fa-rocket"></i> Lancer l'application
+                </a>
+                <a href="test.html" class="btn btn-secondary">
+                    <i class="fas fa-vial"></i> Page de test
+                </a>
+            </div>
+
+            <h2><i class="fas fa-shield-alt"></i> Sécurité et confidentialité</h2>
+            <p>
+                Toutes les données sont stockées localement sur votre appareil. Aucune information n'est transmise 
+                sur internet, garantissant ainsi la confidentialité complète de vos données. L'application fonctionne 
+                entièrement en mode local après le premier chargement.
+            </p>
+
+            <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--medium-gray); text-align: center; color: var(--secondary-color);">
+                <p><i class="fas fa-copyright"></i> 2024 ESU-RSI - Application développée pour la gestion moderne du personnel académique</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

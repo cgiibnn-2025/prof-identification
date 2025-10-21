@@ -1,0 +1,57 @@
+{
+  "name": "prof-identification-esu-rsi",
+  "version": "1.0.0",
+  "description": "Application web moderne de gestion des renseignements du personnel académique de l'ESU-RSI",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "serve": "live-server --port=8000",
+    "build": "echo 'Application prête pour le déploiement'",
+    "test": "echo 'Aucun test configuré pour le moment'"
+  },
+  "keywords": [
+    "education",
+    "academic",
+    "management",
+    "sqlite",
+    "pwa",
+    "javascript",
+    "html5",
+    "css3",
+    "responsive"
+  ],
+  "author": {
+    "name": "ESU-RSI Dev Team",
+    "email": "dev@esu-rsi.org"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/esu-rsi/prof-identification.git"
+  },
+  "bugs": {
+    "url": "https://github.com/esu-rsi/prof-identification/issues"
+  },
+  "homepage": "https://esu-rsi.github.io/prof-identification",
+  "dependencies": {
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
+    "multer": "^1.4.5-lts.1",
+    "cors": "^2.8.5",
+    "body-parser": "^1.20.2"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
