@@ -1,7 +1,7 @@
 {
-  "name": "ESU-RSI - Personnel Académique",
-  "short_name": "ESU-RSI",
-  "description": "Application de gestion des renseignements du personnel académique de l'ESU-RSI",
+  "name": "MINESURSI - Registre des Professeurs",
+  "short_name": "MINESURSI Prof",
+  "description": "Registre d'Identification des Professeurs du Corps académique du MINESURSI",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",

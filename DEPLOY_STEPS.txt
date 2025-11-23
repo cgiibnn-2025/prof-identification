@@ -1,0 +1,26 @@
+# PROCÉDURE DE DÉPLOIEMENT - EXÉCUTER LIGNE PAR LIGNE
+
+# 1. Arrêter le serveur existant
+ssh root@213.136.86.229 'pkill -f "node server.js" || true; sleep 2'
+
+# 2. Supprimer l'ancienne DB
+ssh root@213.136.86.229 'rm -f /opt/idprof.bnn/database/professeurs.db'
+
+# 3. Vérifier que les répertoires existent
+ssh root@213.136.86.229 'mkdir -p /opt/idprof.bnn/database /opt/idprof.bnn/files'
+
+# 4. Copier les fichiers du dist (IMPORTANT: exclure *.db)
+cd dist && rsync -avz --exclude='*.db' --exclude='node_modules' . root@213.136.86.229:/opt/idprof.bnn/ && cd ..
+
+# 5. Installer les dépendances sur le serveur
+ssh root@213.136.86.229 'cd /opt/idprof.bnn && npm install --production --no-optional'
+
+# 6. Démarrer le serveur
+ssh root@213.136.86.229 'cd /opt/idprof.bnn && nohup node server.js > server.log 2>&1 &'
+
+# 7. Attendre et vérifier les logs
+sleep 3
+ssh root@213.136.86.229 'tail -20 /opt/idprof.bnn/server.log'
+
+# 8. Tester la connexion
+curl -s http://213.136.86.229:3000 | head -20

@@ -983,5 +983,10 @@
         "name": "Institut Supérieur Pédagogique de Kirotche",
         "shortname": "ISP-KIROTCHE",
         "path": "LOGO/ISP-KIROTCHE.png"
+    },
+    {
+        "name": "Autres",
+        "shortname": "AUTRES",
+        "path": "LOGO/AUTRES.png"
     }
 ]

@@ -270,6 +270,23 @@ class DatabaseManager {
             return false;
         }
     }
+
+    async searchProfesseur(searchTerm) {
+        try {
+            if (!searchTerm || searchTerm.trim() === '') {
+                return await this.getAllProfesseurs();
+            }
+
+            const response = await fetch(`${this.apiURL}/professeurs/search/${encodeURIComponent(searchTerm)}`);
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('Erreur lors de la recherche:', error);
+            throw error;
+        }
+    }
 }
 
 class AuthManager {
@@ -443,6 +460,7 @@ class ProfesseurApp {
         this.pdfExporter = new PDFExporter();
         this.universites = [];
         this.currentEditId = null;
+        this.editingProfesseurId = null; // Pour gérer le mode édition
         this.currentProfesseurData = null; // Pour stocker les données du professeur dans la modal
         this.init();
     }
@@ -504,6 +522,7 @@ class ProfesseurApp {
         
         const searchBtn = document.getElementById('searchBtn');
         const searchInput = document.getElementById('searchInput');
+        const universityFilter = document.getElementById('universityFilter');
         
         searchBtn.addEventListener('click', this.handleSearch.bind(this));
         searchInput.addEventListener('keypress', (e) => {
@@ -511,6 +530,18 @@ class ProfesseurApp {
                 this.handleSearch();
             }
         });
+
+        // Gestion du filtre par université
+        if (universityFilter) {
+            universityFilter.addEventListener('change', this.handleUniversityFilter.bind(this));
+            this.loadUniversities();
+        }
+
+        // Gestion du choix de diplôme (Oui/Non)
+        const possedeDiplomeSelect = document.getElementById('possedeDiplome');
+        if (possedeDiplomeSelect) {
+            possedeDiplomeSelect.addEventListener('change', this.handleDiplomaChoice.bind(this));
+        }
 
         // Bouton d'exportation PDF de la liste
         const exportPdfBtn = document.getElementById('exportPdfBtn');
@@ -521,6 +552,36 @@ class ProfesseurApp {
         exportDetailPdfBtn.addEventListener('click', this.handleExportDetailPDF.bind(this));
     }
 
+    handleDiplomaChoice() {
+        const possedeDiplomeSelect = document.getElementById('possedeDiplome');
+        const diplomaSection = document.getElementById('diplomaSection');
+        const documentEquivalentSection = document.getElementById('documentEquivalentSection');
+        const copieDiplomeInput = document.getElementById('copieDiplome');
+        const documentEquivalentInput = document.getElementById('documentEquivalent');
+        
+        const choice = possedeDiplomeSelect.value;
+        
+        if (choice === 'Oui') {
+            // Afficher le champ diplôme
+            diplomaSection.style.display = 'block';
+            documentEquivalentSection.style.display = 'none';
+            copieDiplomeInput.required = true;
+            documentEquivalentInput.required = false;
+        } else if (choice === 'Non') {
+            // Afficher le champ documents équivalents
+            diplomaSection.style.display = 'none';
+            documentEquivalentSection.style.display = 'block';
+            copieDiplomeInput.required = false;
+            documentEquivalentInput.required = true;
+        } else {
+            // Masquer les deux
+            diplomaSection.style.display = 'none';
+            documentEquivalentSection.style.display = 'none';
+            copieDiplomeInput.required = false;
+            documentEquivalentInput.required = false;
+        }
+    }
+
     async handleFormSubmit(e) {
         e.preventDefault();
         
@@ -528,11 +589,39 @@ class ProfesseurApp {
         
         try {
             this.showLoading();
-            await this.db.createProfesseur(formData);
-            this.showMessage('Professeur enregistré avec succès !', 'success');
+            
+            // Vérifier si c'est une édition ou une création
+            if (this.editingProfesseurId) {
+                // Mode édition
+                await fetch(`${this.db.apiURL}/professeurs/${this.editingProfesseurId}`, {
+                    method: 'PUT',
+                    body: formData
+                }).then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw new Error(err.error || `HTTP ${response.status}`);
+                        });
+                    }
+                    return response.json();
+                });
+                
+                this.showMessage('Professeur mis à jour avec succès !', 'success');
+                this.editingProfesseurId = null;
+                document.getElementById('submitBtn').textContent = 'Enregistrer le professeur';
+            } else {
+                // Mode création
+                await this.db.createProfesseur(formData);
+                this.showMessage('Professeur enregistré avec succès ! Les données seront affichées dans l\'onglet "Données des professeurs"', 'success');
+            }
+            
             e.target.reset();
             
+            // Recharger et afficher les données si l'admin est connecté
             if (this.auth.isAdmin()) {
+                // Basculer automatiquement à l'onglet des données
+                if (window.tabManager) {
+                    window.tabManager.switchTab('donnees');
+                }
                 await this.loadAndDisplayData();
             }
         } catch (error) {
@@ -578,25 +667,6 @@ class ProfesseurApp {
         professeurs.forEach(prof => {
             const row = document.createElement('tr');
             
-            const createDocumentLinks = (prof) => {
-                const documents = [];
-                
-                if (prof.photo_identite) {
-                    documents.push(`<a href="/files/${prof.photo_identite}" target="_blank" class="doc-link" title="Photo d'identité"><i class="fas fa-image"></i> Photo</a>`);
-                }
-                if (prof.copie_diplome) {
-                    documents.push(`<a href="/files/${prof.copie_diplome}" target="_blank" class="doc-link" title="Copie du diplôme"><i class="fas fa-graduation-cap"></i> Diplôme</a>`);
-                }
-                if (prof.copie_these) {
-                    documents.push(`<a href="/files/${prof.copie_these}" target="_blank" class="doc-link" title="Copie de la thèse"><i class="fas fa-book"></i> Thèse</a>`);
-                }
-                if (prof.arrete_equivalence) {
-                    documents.push(`<a href="/files/${prof.arrete_equivalence}" target="_blank" class="doc-link" title="Arrêté d'équivalence"><i class="fas fa-file-alt"></i> Arrêté</a>`);
-                }
-                
-                return documents.length > 0 ? documents.join('<br>') : '<span class="no-docs">Aucun document</span>';
-            };
-            
             row.innerHTML = `
                 <td>
                     ${prof.photo_identite ? 
@@ -609,13 +679,10 @@ class ProfesseurApp {
                 <td><span class="badge badge-${prof.grade.toLowerCase()}">${prof.grade}</span></td>
                 <td>${prof.universite_attache}</td>
                 <td>${prof.telephone}</td>
-                <td class="documents-cell">
-                    ${createDocumentLinks(prof)}
-                </td>
                 <td>
                     <div class="action-buttons">
                         <button class="btn btn-primary" onclick="app.viewDetails(${prof.id})" title="Voir détails du professeur">
-                            <i class="fas fa-eye"></i> Voir détail
+                            <i class="fas fa-eye"></i>
                         </button>
                         <button class="btn btn-danger" onclick="app.deleteProfesseur(${prof.id})" title="Supprimer">
                             <i class="fas fa-trash"></i>
@@ -631,7 +698,7 @@ class ProfesseurApp {
         const tbody = document.getElementById('professeursTableBody');
         tbody.innerHTML = `
             <tr>
-                <td colspan="8" style="text-align: center; padding: 40px; color: var(--secondary-color);">
+                <td colspan="7" style="text-align: center; padding: 40px; color: var(--secondary-color);">
                     <i class="fas fa-lock" style="font-size: 2rem; margin-bottom: 10px; display: block; color: var(--warning-color);"></i>
                     <strong>Accès restreint</strong><br>
                     Seuls les administrateurs peuvent consulter la liste des professeurs.<br>
@@ -680,10 +747,75 @@ class ProfesseurApp {
         }
     }
 
-    handleSearch() {
-        const query = document.getElementById('searchInput').value;
-        console.log('Recherche:', query);
-        // Implémentation de la recherche
+    async handleSearch() {
+        const query = document.getElementById('searchInput').value.trim();
+        
+        if (!query) {
+            // Si la recherche est vide, charger tous les professeurs
+            await this.loadAndDisplayData();
+            return;
+        }
+
+        try {
+            this.showLoading();
+            const results = await this.db.searchProfesseur(query);
+            
+            if (results.length === 0) {
+                this.showMessage(`Aucun résultat pour "${query}"`, 'warning');
+                this.displayProfesseurs([]);
+            } else {
+                this.showMessage(`${results.length} résultat(s) trouvé(s)`, 'success');
+                this.displayProfesseurs(results);
+            }
+        } catch (error) {
+            console.error('Erreur lors de la recherche:', error);
+            this.showMessage('Erreur lors de la recherche.', 'error');
+        } finally {
+            this.hideLoading();
+        }
+    }
+
+    async loadUniversities() {
+        try {
+            const response = await fetch('/api/universities');
+            const universities = await response.json();
+            
+            const universityFilter = document.getElementById('universityFilter');
+            universities.forEach(uni => {
+                const option = document.createElement('option');
+                option.value = uni;
+                option.textContent = uni;
+                universityFilter.appendChild(option);
+            });
+
+            // Activer le filtre
+            universityFilter.disabled = false;
+        } catch (error) {
+            console.error('Erreur lors du chargement des universités:', error);
+        }
+    }
+
+    async handleUniversityFilter() {
+        const selectedUniversity = document.getElementById('universityFilter').value;
+        
+        try {
+            this.showLoading();
+            
+            if (!selectedUniversity) {
+                // Si aucune université sélectionnée, afficher tous
+                await this.loadAndDisplayData();
+            } else {
+                // Récupérer les professeurs filtrés par université
+                const response = await fetch(`/api/professeurs?university=${encodeURIComponent(selectedUniversity)}`);
+                const results = await response.json();
+                this.displayProfesseurs(results);
+            }
+        } catch (error) {
+            console.error('Erreur lors du filtrage:', error);
+            this.showMessage('Erreur lors du filtrage.', 'error');
+        } finally {
+            this.hideLoading();
+        }
     }
 
     async handleExportPDF() {
@@ -756,9 +888,10 @@ class ProfesseurApp {
                 minute: '2-digit'
             }) : 'Non disponible';
 
-        // Création du contenu HTML des détails
+        // Création du contenu HTML des détails - COMPLET
         modalBody.innerHTML = `
             <div class="professor-details">
+                <!-- ENTÊTE AVEC PHOTO -->
                 <div class="detail-section">
                     <div class="detail-header">
                         <div class="photo-section">
@@ -775,6 +908,7 @@ class ProfesseurApp {
                     </div>
                 </div>
 
+                <!-- INFORMATIONS PERSONNELLES -->
                 <div class="detail-section">
                     <h3><i class="fas fa-id-card"></i> Informations Personnelles</h3>
                     <div class="detail-grid">
@@ -805,6 +939,7 @@ class ProfesseurApp {
                     </div>
                 </div>
 
+                <!-- INFORMATIONS ACADÉMIQUES ET DE DOCTORAT -->
                 <div class="detail-section">
                     <h3><i class="fas fa-graduation-cap"></i> Informations Académiques</h3>
                     <div class="detail-grid">
@@ -817,7 +952,7 @@ class ProfesseurApp {
                             <span>${professeur.universite_attache || 'Non renseignée'}</span>
                         </div>
                         <div class="detail-item">
-                            <label>Type de diplôme:</label>
+                            <label>Type de diplôme de doctorat:</label>
                             <span>${professeur.type_diplome || 'Non renseigné'}</span>
                         </div>
                         <div class="detail-item">
@@ -832,109 +967,87 @@ class ProfesseurApp {
                             <label>Université de soutenance:</label>
                             <span>${professeur.universite_soutenance || 'Non renseignée'}</span>
                         </div>
+                        <div class="detail-item full-width">
+                            <label>Sujet ou intitulé de la thèse:</label>
+                            <span>${professeur.sujet_these || 'Non renseigné'}</span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- ÉQUIVALENCES ET ARRÊTÉS -->
                 <div class="detail-section">
                     <h3><i class="fas fa-certificate"></i> Équivalences et Arrêtés</h3>
                     <div class="detail-grid">
                         <div class="detail-item">
-                            <label>Numéro d'équivalence:</label>
+                            <label>Numéro d'équivalence (si diplôme hors RDC):</label>
                             <span>${professeur.numero_equivalence || 'Non renseigné'}</span>
                         </div>
                         <div class="detail-item">
-                            <label>Numéro d'arrêté:</label>
+                            <label>Référence du dernier arrêté ministériel:</label>
                             <span>${professeur.numero_arrete || 'Non renseigné'}</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- INFORMATIONS FINANCIÈRES -->
                 <div class="detail-section">
                     <h3><i class="fas fa-money-bill-wave"></i> Informations Financières</h3>
                     <div class="detail-grid">
                         <div class="detail-item">
                             <label>Salaire de base:</label>
-                            <span>${professeur.salaire_base || 'Non renseigné'}</span>
+                            <span class="badge badge-${professeur.salaire_base === 'Oui' ? 'success' : 'secondary'}">${professeur.salaire_base || 'Non renseigné'}</span>
                         </div>
                         <div class="detail-item">
                             <label>Prime institutionnelle:</label>
-                            <span>${professeur.prime_institutionnelle || 'Non renseignée'}</span>
+                            <span class="badge badge-${professeur.prime_institutionnelle === 'Oui' ? 'success' : 'secondary'}">${professeur.prime_institutionnelle || 'Non renseignée'}</span>
                         </div>
                     </div>
                 </div>
 
+                <!-- DOCUMENTS -->
                 <div class="detail-section">
                     <h3><i class="fas fa-file-alt"></i> Documents</h3>
-                    <div class="documents-grid">
+                    <div class="documents-list">
                         ${professeur.photo_identite ? 
-                            `<div class="document-item">
-                                <i class="fas fa-image"></i>
-                                <span>Photo d'identité</span>
-                                <a href="/files/${professeur.photo_identite}" target="_blank" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i> Voir
-                                </a>
-                            </div>` : ''
+                            `<a href="/files/${professeur.photo_identite}" target="_blank" class="doc-link" title="Photo d'identité"><i class="fas fa-image"></i> Photo</a>` : 
+                            `<span class="doc-link-missing"><i class="fas fa-times-circle"></i> Photo</span>`
                         }
-                        ${professeur.copie_diplome ? 
-                            `<div class="document-item">
-                                <i class="fas fa-graduation-cap"></i>
-                                <span>Copie du diplôme</span>
-                                <a href="/files/${professeur.copie_diplome}" target="_blank" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i> Voir
-                                </a>
-                            </div>` : ''
-                        }
-                        ${professeur.copie_these ? 
-                            `<div class="document-item">
-                                <i class="fas fa-book"></i>
-                                <span>Copie de la thèse</span>
-                                <a href="/files/${professeur.copie_these}" target="_blank" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i> Voir
-                                </a>
-                            </div>` : ''
+                        ${professeur.possede_diplome === 'Oui' ? (
+                            professeur.copie_diplome ? 
+                                `<a href="/files/${professeur.copie_diplome}" target="_blank" class="doc-link" title="Copie du diplôme"><i class="fas fa-graduation-cap"></i> Diplôme</a>` : 
+                                `<span class="doc-link-missing"><i class="fas fa-times-circle"></i> Diplôme</span>`
+                        ) : (
+                            professeur.document_equivalent ? (
+                                professeur.document_equivalent.split(',').map(doc => doc.trim()).map(doc => 
+                                    `<a href="/files/${doc}" target="_blank" class="doc-link" title="Document équivalent"><i class="fas fa-file"></i> Equivalent-diplôme</a>`
+                                ).join('')
+                            ) : 
+                                `<span class="doc-link-missing"><i class="fas fa-times-circle"></i> Equivalent-diplôme</span>`
+                        )}
+                        ${professeur.copie_these ? (
+                            professeur.copie_these.includes(',') ? (
+                                professeur.copie_these.split(',').map(doc => doc.trim()).map(doc => 
+                                    `<a href="/files/${doc}" target="_blank" class="doc-link" title="Copie de la thèse"><i class="fas fa-book"></i> Thèse</a>`
+                                ).join('')
+                            ) : (
+                                `<a href="/files/${professeur.copie_these}" target="_blank" class="doc-link" title="Copie de la thèse"><i class="fas fa-book"></i> Thèse</a>`
+                            )
+                        ) : 
+                            `<span class="doc-link-missing"><i class="fas fa-times-circle"></i> Thèse</span>`
                         }
                         ${professeur.arrete_equivalence ? 
-                            `<div class="document-item">
-                                <i class="fas fa-file-alt"></i>
-                                <span>Arrêté d'équivalence</span>
-                                <a href="/files/${professeur.arrete_equivalence}" target="_blank" class="btn btn-primary btn-sm">
-                                    <i class="fas fa-eye"></i> Voir
-                                </a>
-                            </div>` : ''
-                        }
-                        ${!professeur.photo_identite && !professeur.copie_diplome && !professeur.copie_these && !professeur.arrete_equivalence ? 
-                            '<div class="no-documents"><i class="fas fa-inbox"></i> Aucun document disponible</div>' : ''
+                            `<a href="/files/${professeur.arrete_equivalence}" target="_blank" class="doc-link" title="Arrêté d'équivalence"><i class="fas fa-file-alt"></i> Arrêté</a>` : 
+                            ``
                         }
                     </div>
                 </div>
 
+                <!-- COMMENTAIRES -->
                 <div class="detail-section">
-                    <h3><i class="fas fa-comment"></i> Commentaires et Notes</h3>
+                    <h3><i class="fas fa-comment"></i> Commentaires / Notes</h3>
                     <div class="detail-grid">
                         <div class="detail-item full-width">
-                            <label>Commentaire:</label>
                             <span>${professeur.commentaire || 'Aucun commentaire'}</span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Confirmation:</label>
-                            <span class="confirmation-status ${professeur.confirmation ? 'confirmed' : 'pending'}">
-                                <i class="fas fa-${professeur.confirmation ? 'check-circle' : 'clock'}"></i>
-                                ${professeur.confirmation ? 'Confirmé' : 'En attente'}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="detail-section">
-                    <h3><i class="fas fa-clock"></i> Informations Système</h3>
-                    <div class="detail-grid">
-                        <div class="detail-item">
-                            <label>ID:</label>
-                            <span><code>${professeur.id}</code></span>
-                        </div>
-                        <div class="detail-item">
-                            <label>Date d'enregistrement:</label>
-                            <span>${dateEnregistrement}</span>
                         </div>
                     </div>
                 </div>
@@ -944,6 +1057,12 @@ class ProfesseurApp {
         // Afficher la modal
         modal.style.display = 'block';
         
+        // Afficher le bouton Éditer seulement si l'admin est connecté
+        const editBtn = document.getElementById('editDetailBtn');
+        if (editBtn) {
+            editBtn.style.display = this.auth.isAdmin() ? 'inline-block' : 'none';
+        }
+        
         // Gérer la fermeture de la modal
         this.setupDetailModalListeners();
     }
@@ -951,6 +1070,17 @@ class ProfesseurApp {
     setupDetailModalListeners() {
         const modal = document.getElementById('detailModal');
         const closeBtn = modal.querySelector('.close');
+        const editBtn = document.getElementById('editDetailBtn');
+        
+        // Bouton Éditer
+        if (editBtn) {
+            editBtn.onclick = () => {
+                if (this.currentProfesseurData) {
+                    this.loadEditForm(this.currentProfesseurData);
+                    modal.style.display = 'none';
+                }
+            };
+        }
         
         // Fermer avec le bouton X
         closeBtn.onclick = () => {
@@ -976,6 +1106,50 @@ class ProfesseurApp {
         };
         
         document.addEventListener('keydown', handleKeyPress);
+    }
+
+    loadEditForm(professeur) {
+        // Charger les données du professeur dans le formulaire
+        document.getElementById('nom').value = professeur.nom || '';
+        document.getElementById('sexe').value = professeur.sexe || '';
+        document.getElementById('matricule').value = professeur.matricule || '';
+        document.getElementById('lieuNaissance').value = professeur.lieu_naissance || '';
+        document.getElementById('dateNaissance').value = professeur.date_naissance || '';
+        document.getElementById('grade').value = professeur.grade || '';
+        document.getElementById('paysSoutenance').value = professeur.pays_soutenance || '';
+        document.getElementById('universiteSoutenance').value = professeur.universite_soutenance || '';
+        document.getElementById('numeroEquivalence').value = professeur.numero_equivalence || '';
+        document.getElementById('dateSoutenance').value = professeur.date_soutenance || '';
+        document.getElementById('typeDiplome').value = professeur.type_diplome || '';
+        document.getElementById('universiteAttache').value = professeur.universite_attache || '';
+        document.getElementById('email').value = professeur.email || '';
+        document.getElementById('telephone').value = professeur.telephone || '';
+        document.getElementById('numeroArrete').value = professeur.numero_arrete || '';
+        document.getElementById('primeInstitutionnelle').value = professeur.prime_institutionnelle || '';
+        document.getElementById('salaireBase').value = professeur.salaire_base || '';
+        document.getElementById('sujetThese').value = professeur.sujet_these || '';
+        document.getElementById('commentaire').value = professeur.commentaire || '';
+        document.getElementById('possedeDiplome').value = professeur.possede_diplome || '';
+        
+        // Déclencher handleDiplomaChoice pour afficher les bons champs
+        if (professeur.possede_diplome) {
+            this.handleDiplomaChoice();
+        }
+        
+        // Marquer le formulaire comme en mode édition
+        this.editingProfesseurId = professeur.id;
+        document.getElementById('submitBtn').textContent = 'Mettre à jour le professeur';
+        
+        // Aller à l'onglet du formulaire
+        document.querySelector('input[name="tab"][value="form"]').checked = true;
+        const formSection = document.querySelector('.tab-content[data-tab="form"]');
+        if (formSection) {
+            formSection.style.display = 'block';
+        }
+        const donneesSection = document.querySelector('.tab-content[data-tab="donnees"]');
+        if (donneesSection) {
+            donneesSection.style.display = 'none';
+        }
     }
 
     showMessage(message, type = 'info') {
@@ -1114,10 +1288,10 @@ class PDFExporter {
         doc.setFontSize(12);
         doc.setFont('helvetica', 'normal');
         doc.setTextColor(75, 85, 99);
-        doc.text('Personnel Académique', 80, 22);
+        doc.text('Corps académique du MINESURSI', 75, 22);
         
         doc.setFontSize(9);
-        doc.text('Application de gestion des renseignements', 80, 27);
+        doc.text('Registre d\'Identification des Professeurs', 75, 27);
 
         // Ligne de séparation
         doc.setLineWidth(1);

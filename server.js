@@ -54,13 +54,18 @@ const dbPath = path.join(__dirname, 'database', 'professeurs.db');
 const dbDir = path.dirname(dbPath);
 if (!fs.existsSync(dbDir)) {
     fs.mkdirSync(dbDir, { recursive: true });
+    console.log(`📁 Dossier créé: ${dbDir}`);
 }
+
+console.log(`📍 Chemin DB: ${dbPath}`);
+console.log(`📍 DB existe: ${fs.existsSync(dbPath) ? 'OUI' : 'NON (va être créée)'}`);
 
 const db = new sqlite3.Database(dbPath, (err) => {
     if (err) {
-        console.error('Erreur lors de l\'ouverture de la base de données:', err);
+        console.error('❌ Erreur lors de l\'ouverture de la base de données:', err);
+        process.exit(1);
     } else {
-        console.log('Connexion à la base de données SQLite réussie');
+        console.log('✅ Connexion à la base de données SQLite réussie');
         initDatabase();
     }
 });
@@ -72,7 +77,7 @@ function initDatabase() {
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nom TEXT NOT NULL,
             sexe TEXT NOT NULL,
-            matricule TEXT NOT NULL,
+            matricule TEXT NOT NULL UNIQUE,
             lieu_naissance TEXT NOT NULL,
             date_naissance TEXT NOT NULL,
             grade TEXT NOT NULL,
@@ -83,14 +88,17 @@ function initDatabase() {
             date_soutenance TEXT NOT NULL,
             type_diplome TEXT NOT NULL,
             universite_attache TEXT NOT NULL,
-            email TEXT,
-            telephone TEXT NOT NULL,
+            email TEXT UNIQUE,
+            telephone TEXT NOT NULL UNIQUE,
             numero_arrete TEXT NOT NULL,
             prime_institutionnelle TEXT NOT NULL,
             salaire_base TEXT NOT NULL,
             photo_identite TEXT,
+            possede_diplome TEXT,
             copie_diplome TEXT,
+            document_equivalent TEXT,
             copie_these TEXT,
+            sujet_these TEXT,
             commentaire TEXT NOT NULL,
             confirmation INTEGER NOT NULL,
             date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -109,25 +117,53 @@ function initDatabase() {
 
     db.run(createProfesseursTable, (err) => {
         if (err) {
-            console.error('Erreur lors de la création de la table professeurs:', err);
+            console.error('❌ Erreur lors de la création de la table professeurs:', err);
         } else {
-            console.log('Table professeurs créée ou existe déjà');
+            console.log('✅ Table professeurs créée ou existe déjà');
         }
+    });
+
+    // Vérifier et ajouter les colonnes manquantes (pour migration sur les anciennes bases)
+    db.all("PRAGMA table_info(professeurs)", [], (err, cols) => {
+        if (err) {
+            console.error('Erreur lors de la vérification des colonnes de professeurs:', err);
+            return;
+        }
+
+        const columnNames = cols ? cols.map(c => c.name) : [];
+        const columnsToAdd = [
+            { name: 'sujet_these', sql: "ALTER TABLE professeurs ADD COLUMN sujet_these TEXT" },
+            { name: 'possede_diplome', sql: "ALTER TABLE professeurs ADD COLUMN possede_diplome TEXT" },
+            { name: 'document_equivalent', sql: "ALTER TABLE professeurs ADD COLUMN document_equivalent TEXT" }
+        ];
+
+        columnsToAdd.forEach(col => {
+            if (!columnNames.includes(col.name)) {
+                console.log(`⚙️ Colonne '${col.name}' manquante — ajout en cours...`);
+                db.run(col.sql, (alterErr) => {
+                    if (alterErr) {
+                        console.error(`❌ Erreur lors de l'ajout de la colonne '${col.name}':`, alterErr);
+                    } else {
+                        console.log(`✅ Colonne '${col.name}' ajoutée à la table professeurs`);
+                    }
+                });
+            }
+        });
     });
 
     db.run(createAdminTable, (err) => {
         if (err) {
-            console.error('Erreur lors de la création de la table administrateurs:', err);
+            console.error('❌ Erreur lors de la création de la table administrateurs:', err);
         } else {
-            console.log('Table administrateurs créée ou existe déjà');
+            console.log('✅ Table administrateurs créée ou existe déjà');
             
             // Insérer un administrateur par défaut
             const insertAdmin = `INSERT OR IGNORE INTO administrateurs (username, password) VALUES (?, ?)`;
             db.run(insertAdmin, ['admin', 'admin123'], (err) => {
                 if (err) {
-                    console.error('Erreur lors de l\'insertion de l\'admin par défaut:', err);
+                    console.error('❌ Erreur lors de l\'insertion de l\'admin par défaut:', err);
                 } else {
-                    console.log('Administrateur par défaut créé (admin/admin123)');
+                    console.log('✅ Administrateur par défaut créé (admin/admin123)');
                 }
             });
         }
@@ -215,19 +251,22 @@ app.post('/api/admin/change-password', (req, res) => {
 app.post('/api/professeurs', upload.fields([
     { name: 'photoIdentite', maxCount: 1 },
     { name: 'copieDiplome', maxCount: 1 },
-    { name: 'copieThese', maxCount: 1 },
+    { name: 'documentEquivalent', maxCount: 10 },
+    { name: 'copieThese', maxCount: 10 },
     { name: 'arreteEquivalence', maxCount: 1 }
 ]), (req, res) => {
     const {
         nom, sexe, matricule, lieuNaissance, dateNaissance, grade,
         paysSoutenance, universiteSoutenance, numeroEquivalence,
         dateSoutenance, typeDiplome, universiteAttache, email, telephone,
-        numeroArrete, primeInstitutionnelle, salaireBase, commentaire, confirmation
+        numeroArrete, primeInstitutionnelle, salaireBase, commentaire, confirmation,
+        sujetThese, possedeDiplome
     } = req.body;
 
     // Sauvegarder les noms de fichiers au lieu du contenu
     let photoIdentite = null;
     let copieDiplome = null;
+    let documentEquivalent = null;
     let copieThese = null;
     let arreteEquivalence = null;
 
@@ -238,8 +277,13 @@ app.post('/api/professeurs', upload.fields([
         if (req.files.copieDiplome && req.files.copieDiplome[0]) {
             copieDiplome = req.files.copieDiplome[0].filename;
         }
-        if (req.files.copieThese && req.files.copieThese[0]) {
-            copieThese = req.files.copieThese[0].filename;
+        if (req.files.documentEquivalent && req.files.documentEquivalent.length > 0) {
+            // Stocker les noms de fichiers séparés par des virgules
+            documentEquivalent = req.files.documentEquivalent.map(f => f.filename).join(',');
+        }
+        if (req.files.copieThese && req.files.copieThese.length > 0) {
+            // Stocker les noms de fichiers séparés par des virgules pour les thèses
+            copieThese = req.files.copieThese.map(f => f.filename).join(',');
         }
         if (req.files.arreteEquivalence && req.files.arreteEquivalence[0]) {
             arreteEquivalence = req.files.arreteEquivalence[0].filename;
@@ -252,8 +296,8 @@ app.post('/api/professeurs', upload.fields([
             pays_soutenance, universite_soutenance, numero_equivalence, arrete_equivalence,
             date_soutenance, type_diplome, universite_attache, email, telephone,
             numero_arrete, prime_institutionnelle, salaire_base, photo_identite,
-            copie_diplome, copie_these, commentaire, confirmation
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            copie_diplome, copie_these, sujet_these, commentaire, confirmation, possede_diplome, document_equivalent
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const values = [
@@ -261,12 +305,25 @@ app.post('/api/professeurs', upload.fields([
         paysSoutenance, universiteSoutenance, numeroEquivalence, arreteEquivalence,
         dateSoutenance, typeDiplome, universiteAttache, email, telephone,
         numeroArrete, primeInstitutionnelle, salaireBase, photoIdentite,
-        copieDiplome, copieThese, commentaire, confirmation === 'true' ? 1 : 0
+        copieDiplome, copieThese, sujetThese, commentaire, confirmation === 'true' ? 1 : 0,
+        possedeDiplome, documentEquivalent
     ];
 
     db.run(insertQuery, values, function(err) {
         if (err) {
             console.error('Erreur lors de l\'insertion:', err);
+            
+            // Gestion des erreurs UNIQUE
+            if (err.message.includes('UNIQUE constraint failed: professeurs.matricule')) {
+                return res.status(400).json({ error: 'Ce matricule existe déjà' });
+            }
+            if (err.message.includes('UNIQUE constraint failed: professeurs.email')) {
+                return res.status(400).json({ error: 'Cet email est déjà enregistré' });
+            }
+            if (err.message.includes('UNIQUE constraint failed: professeurs.telephone')) {
+                return res.status(400).json({ error: 'Ce numéro de téléphone est déjà enregistré' });
+            }
+            
             return res.status(500).json({ error: 'Erreur lors de l\'enregistrement' });
         }
         
@@ -280,15 +337,40 @@ app.post('/api/professeurs', upload.fields([
 
 // Route pour récupérer tous les professeurs
 app.get('/api/professeurs', (req, res) => {
-    const query = `SELECT * FROM professeurs ORDER BY date_creation DESC`;
+    const university = req.query.university;
     
-    db.all(query, [], (err, rows) => {
+    let query = `SELECT * FROM professeurs`;
+    let params = [];
+    
+    if (university) {
+        query += ` WHERE universite_attache = ?`;
+        params.push(university);
+    }
+    
+    query += ` ORDER BY date_creation DESC`;
+    
+    db.all(query, params, (err, rows) => {
         if (err) {
             console.error('Erreur lors de la récupération:', err);
             return res.status(500).json({ error: 'Erreur serveur' });
         }
         
         res.json(rows);
+    });
+});
+
+// Route pour récupérer les universités uniques
+app.get('/api/universities', (req, res) => {
+    const query = `SELECT DISTINCT universite_attache FROM professeurs WHERE universite_attache IS NOT NULL AND universite_attache != '' ORDER BY universite_attache`;
+    
+    db.all(query, [], (err, rows) => {
+        if (err) {
+            console.error('Erreur lors de la récupération des universités:', err);
+            return res.status(500).json({ error: 'Erreur serveur' });
+        }
+        
+        const universities = rows.map(row => row.universite_attache);
+        res.json(universities);
     });
 });
 
@@ -329,6 +411,109 @@ app.get('/api/professeurs/search/:term', (req, res) => {
         }
         
         res.json(rows);
+    });
+});
+
+// Route pour mettre à jour un professeur
+app.put('/api/professeurs/:id', upload.fields([
+    { name: 'photoIdentite', maxCount: 1 },
+    { name: 'copieDiplome', maxCount: 1 },
+    { name: 'documentEquivalent', maxCount: 10 },
+    { name: 'copieThese', maxCount: 10 },
+    { name: 'arreteEquivalence', maxCount: 1 }
+]), (req, res) => {
+    const id = req.params.id;
+    const {
+        nom, sexe, matricule, lieuNaissance, dateNaissance, grade,
+        paysSoutenance, universiteSoutenance, numeroEquivalence,
+        dateSoutenance, typeDiplome, universiteAttache, email, telephone,
+        numeroArrete, primeInstitutionnelle, salaireBase, commentaire, confirmation,
+        sujetThese, possedeDiplome
+    } = req.body;
+
+    // Construire la requête UPDATE dynamiquement
+    const updates = [];
+    const values = [];
+
+    if (nom) { updates.push('nom = ?'); values.push(nom); }
+    if (sexe) { updates.push('sexe = ?'); values.push(sexe); }
+    if (matricule) { updates.push('matricule = ?'); values.push(matricule); }
+    if (lieuNaissance) { updates.push('lieu_naissance = ?'); values.push(lieuNaissance); }
+    if (dateNaissance) { updates.push('date_naissance = ?'); values.push(dateNaissance); }
+    if (grade) { updates.push('grade = ?'); values.push(grade); }
+    if (paysSoutenance) { updates.push('pays_soutenance = ?'); values.push(paysSoutenance); }
+    if (universiteSoutenance) { updates.push('universite_soutenance = ?'); values.push(universiteSoutenance); }
+    if (numeroEquivalence) { updates.push('numero_equivalence = ?'); values.push(numeroEquivalence); }
+    if (dateSoutenance) { updates.push('date_soutenance = ?'); values.push(dateSoutenance); }
+    if (typeDiplome) { updates.push('type_diplome = ?'); values.push(typeDiplome); }
+    if (universiteAttache) { updates.push('universite_attache = ?'); values.push(universiteAttache); }
+    if (email) { updates.push('email = ?'); values.push(email); }
+    if (telephone) { updates.push('telephone = ?'); values.push(telephone); }
+    if (numeroArrete) { updates.push('numero_arrete = ?'); values.push(numeroArrete); }
+    if (primeInstitutionnelle) { updates.push('prime_institutionnelle = ?'); values.push(primeInstitutionnelle); }
+    if (salaireBase) { updates.push('salaire_base = ?'); values.push(salaireBase); }
+    if (sujetThese) { updates.push('sujet_these = ?'); values.push(sujetThese); }
+    if (commentaire) { updates.push('commentaire = ?'); values.push(commentaire); }
+    if (confirmation !== undefined) { updates.push('confirmation = ?'); values.push(confirmation === 'true' ? 1 : 0); }
+    if (possedeDiplome) { updates.push('possede_diplome = ?'); values.push(possedeDiplome); }
+
+    // Gérer les fichiers
+    if (req.files) {
+        if (req.files.photoIdentite && req.files.photoIdentite[0]) {
+            updates.push('photo_identite = ?');
+            values.push(req.files.photoIdentite[0].filename);
+        }
+        if (req.files.copieDiplome && req.files.copieDiplome[0]) {
+            updates.push('copie_diplome = ?');
+            values.push(req.files.copieDiplome[0].filename);
+        }
+        if (req.files.documentEquivalent && req.files.documentEquivalent.length > 0) {
+            updates.push('document_equivalent = ?');
+            values.push(req.files.documentEquivalent.map(f => f.filename).join(','));
+        }
+        if (req.files.copieThese && req.files.copieThese.length > 0) {
+            updates.push('copie_these = ?');
+            values.push(req.files.copieThese.map(f => f.filename).join(','));
+        }
+        if (req.files.arreteEquivalence && req.files.arreteEquivalence[0]) {
+            updates.push('arrete_equivalence = ?');
+            values.push(req.files.arreteEquivalence[0].filename);
+        }
+    }
+
+    if (updates.length === 0) {
+        return res.status(400).json({ error: 'Aucune donnée à mettre à jour' });
+    }
+
+    values.push(id);
+    const updateQuery = `UPDATE professeurs SET ${updates.join(', ')} WHERE id = ?`;
+
+    db.run(updateQuery, values, function(err) {
+        if (err) {
+            console.error('Erreur lors de la mise à jour:', err);
+            
+            // Gestion des erreurs UNIQUE
+            if (err.message.includes('UNIQUE constraint failed: professeurs.matricule')) {
+                return res.status(400).json({ error: 'Ce matricule existe déjà' });
+            }
+            if (err.message.includes('UNIQUE constraint failed: professeurs.email')) {
+                return res.status(400).json({ error: 'Cet email est déjà enregistré' });
+            }
+            if (err.message.includes('UNIQUE constraint failed: professeurs.telephone')) {
+                return res.status(400).json({ error: 'Ce numéro de téléphone est déjà enregistré' });
+            }
+            
+            return res.status(500).json({ error: 'Erreur lors de la mise à jour' });
+        }
+
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Professeur non trouvé' });
+        }
+
+        res.json({
+            success: true,
+            message: 'Professeur mis à jour avec succès'
+        });
     });
 });
 
@@ -373,9 +558,10 @@ app.use((err, req, res, next) => {
 });
 
 // Démarrage du serveur
-app.listen(PORT, () => {
-    console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Serveur démarré sur http://0.0.0.0:${PORT}`);
     console.log(`📁 Base de données SQLite: ${dbPath}`);
+    console.log(`✅ Application accessible sur http://213.136.86.229:${PORT}`);
 });
 
 // Gestion propre de l'arrêt

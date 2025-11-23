@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESU-RSI - Identification du Personnel Académique</title>
+    <title>ESURSI - Identification du Personnel Académique</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2563eb">
     <meta name="description" content="Application de gestion des renseignements du personnel académique de l'ESU-RSI">
@@ -21,8 +21,8 @@
             <div class="header-content">
                 <img src="app-logo.png" alt="ESU-RSI Logo" class="logo">
                 <div class="header-text">
-                    <h1>Application de gestion des renseignements</h1>
-                    <h2>Personnel Académique de l'ESU-RSI</h2>
+                    <h1>Registre d'Identification des Professeurs</h1>
+                    <h2>Corps académique du MINESURSI</h2>
                 </div>
                 <div class="admin-section">
                     <button id="adminLoginBtn" class="btn btn-admin">
@@ -203,14 +203,34 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="possedeDiplome" class="required">Possédez-vous un diplôme ?</label>
+                            <select id="possedeDiplome" name="possedeDiplome" required>
+                                <option value="">Sélectionnez</option>
+                                <option value="Oui">Oui</option>
+                                <option value="Non">Non</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group" id="diplomaSection" style="display: none;">
                             <label for="copieDiplome" class="required">Copie de votre dernier diplôme</label>
-                            <input type="file" id="copieDiplome" name="copieDiplome" accept=".pdf,.jpg,.jpeg,.png" required>
+                            <input type="file" id="copieDiplome" name="copieDiplome" accept=".pdf,.jpg,.jpeg,.png">
+                        </div>
+
+                        <div class="form-group" id="documentEquivalentSection" style="display: none;">
+                            <label for="documentEquivalent" class="required">Joindre un ou plusieurs documents équivalents</label>
+                            <input type="file" id="documentEquivalent" name="documentEquivalent" accept=".pdf,.jpg,.jpeg,.png" multiple>
+                            <div class="file-info">Vous pouvez sélectionner plusieurs fichiers</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="sujetThese">Sujet ou intitulé de la thèse</label>
+                            <input type="text" id="sujetThese" name="sujetThese" placeholder="Sujet ou intitulé de la thèse">
                         </div>
 
                         <div class="form-group">
                             <label for="copieThese" class="required">Copie de la thèse (PDF)</label>
-                            <input type="file" id="copieThese" name="copieThese" accept=".pdf" required>
-                            <div class="file-info">Format accepté: PDF uniquement</div>
+                            <input type="file" id="copieThese" name="copieThese" accept=".pdf" multiple required>
+                            <div class="file-info">Format accepté: PDF uniquement - Vous pouvez sélectionner plusieurs fichiers</div>
                         </div>
                     </div>
 
@@ -228,7 +248,7 @@
                             <label class="checkbox-label">
                                 <input type="checkbox" id="confirmation" name="confirmation" required>
                                 <span class="checkmark"></span>
-                                <span class="required">Ces renseignements sont vrais et vérifiables</span>
+                                <span class="checkbox-text">Ces renseignements sont vrais et vérifiables</span>
                             </label>
                         </div>
                     </div>
@@ -269,6 +289,9 @@
                             
                             <div class="search-container">
                                 <input type="text" id="searchInput" placeholder="Rechercher un professeur..." disabled>
+                                <select id="universityFilter" disabled style="max-width: 250px;">
+                                    <option value="">Tous les professeurs</option>
+                                </select>
                                 <button id="searchBtn" class="btn btn-search" disabled>
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -289,7 +312,6 @@
                                     <th>Grade</th>
                                     <th>Université</th>
                                     <th>Téléphone</th>
-                                    <th>Documents</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -308,6 +330,9 @@
                 <div class="modal-header">
                     <h3>Détails du professeur</h3>
                     <div class="modal-header-actions">
+                        <button id="editDetailBtn" class="btn btn-primary btn-sm" style="display: none;">
+                            <i class="fas fa-edit"></i> Éditer
+                        </button>
                         <button id="exportDetailPdfBtn" class="btn btn-secondary btn-sm">
                             <i class="fas fa-file-pdf"></i> Exporter PDF
                         </button>
@@ -345,7 +370,7 @@
                         </div>
                     </form>
                     <div class="login-info">
-                        <p><small><i class="fas fa-info-circle"></i> Identifiants par défaut: admin / admin123</small></p>
+                        <p><small><i class="fas fa-info-circle"></i> Assurez-vous de bien complèter les identifiants</small></p>
                     </div>
                 </div>
             </div>

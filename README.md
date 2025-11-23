@@ -1,6 +1,6 @@
-# Application de Gestion du Personnel Académique ESU-RSI
+# Registre d'Identification des Professeurs - MINESURSI
 
-Une application web moderne pour la gestion des renseignements du personnel académique de l'ESU-RSI (Enseignement Supérieur et Universitaire - République Socialiste d'Italie).
+Une application web moderne pour l'identification et la gestion du corps académique du MINESURSI (Ministère de l'Enseignement Supérieur, Universitaire et Recherche Scientifique et Innovation).
 
 ## Fonctionnalités
 
