@@ -99,6 +99,7 @@ function initDatabase() {
             document_equivalent TEXT,
             copie_these TEXT,
             sujet_these TEXT,
+            domaine_recherche TEXT,
             commentaire TEXT NOT NULL,
             confirmation INTEGER NOT NULL,
             date_creation DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -134,7 +135,8 @@ function initDatabase() {
         const columnsToAdd = [
             { name: 'sujet_these', sql: "ALTER TABLE professeurs ADD COLUMN sujet_these TEXT" },
             { name: 'possede_diplome', sql: "ALTER TABLE professeurs ADD COLUMN possede_diplome TEXT" },
-            { name: 'document_equivalent', sql: "ALTER TABLE professeurs ADD COLUMN document_equivalent TEXT" }
+            { name: 'document_equivalent', sql: "ALTER TABLE professeurs ADD COLUMN document_equivalent TEXT" },
+            { name: 'domaine_recherche', sql: "ALTER TABLE professeurs ADD COLUMN domaine_recherche TEXT" }
         ];
 
         columnsToAdd.forEach(col => {
@@ -260,7 +262,7 @@ app.post('/api/professeurs', upload.fields([
         paysSoutenance, universiteSoutenance, numeroEquivalence,
         dateSoutenance, typeDiplome, universiteAttache, email, telephone,
         numeroArrete, primeInstitutionnelle, salaireBase, commentaire, confirmation,
-        sujetThese, possedeDiplome
+        sujetThese, possedeDiplome, domaineRecherche
     } = req.body;
 
     // Sauvegarder les noms de fichiers au lieu du contenu
@@ -296,8 +298,8 @@ app.post('/api/professeurs', upload.fields([
             pays_soutenance, universite_soutenance, numero_equivalence, arrete_equivalence,
             date_soutenance, type_diplome, universite_attache, email, telephone,
             numero_arrete, prime_institutionnelle, salaire_base, photo_identite,
-            copie_diplome, copie_these, sujet_these, commentaire, confirmation, possede_diplome, document_equivalent
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            copie_diplome, copie_these, sujet_these, domaine_recherche, commentaire, confirmation, possede_diplome, document_equivalent
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const values = [
@@ -305,7 +307,7 @@ app.post('/api/professeurs', upload.fields([
         paysSoutenance, universiteSoutenance, numeroEquivalence, arreteEquivalence,
         dateSoutenance, typeDiplome, universiteAttache, email, telephone,
         numeroArrete, primeInstitutionnelle, salaireBase, photoIdentite,
-        copieDiplome, copieThese, sujetThese, commentaire, confirmation === 'true' ? 1 : 0,
+        copieDiplome, copieThese, sujetThese, domaineRecherche, commentaire, confirmation === 'true' ? 1 : 0,
         possedeDiplome, documentEquivalent
     ];
 

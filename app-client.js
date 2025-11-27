@@ -968,6 +968,10 @@ class ProfesseurApp {
                             <span>${professeur.universite_soutenance || 'Non renseignée'}</span>
                         </div>
                         <div class="detail-item full-width">
+                            <label>Domaine de recherche:</label>
+                            <span>${professeur.domaine_recherche || 'Non renseigné'}</span>
+                        </div>
+                        <div class="detail-item full-width">
                             <label>Sujet ou intitulé de la thèse:</label>
                             <span>${professeur.sujet_these || 'Non renseigné'}</span>
                         </div>
