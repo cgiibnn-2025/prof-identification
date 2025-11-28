@@ -671,7 +671,7 @@ class ProfesseurApp {
 
     async addNewUniversity(universityName) {
         try {
-            const response = await fetch(`${this.db.apiURL}/universities/add-new`, {
+            const response = await fetch(`${this.db.apiURL}/universities/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -684,7 +684,8 @@ class ProfesseurApp {
             });
 
             if (!response.ok) {
-                throw new Error('Erreur lors de l\'ajout de l\'université');
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.error || 'Erreur lors de l\'ajout de l\'université');
             }
 
             console.log(`✅ Université '${universityName}' ajoutée à etab-new.json`);
