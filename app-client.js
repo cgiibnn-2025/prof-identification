@@ -543,6 +543,12 @@ class ProfesseurApp {
             possedeDiplomeSelect.addEventListener('change', this.handleDiplomaChoice.bind(this));
         }
 
+        // Gestion du choix d'université (afficher champ "Autres" si nécessaire)
+        const universiteAttacheSelect = document.getElementById('universiteAttache');
+        if (universiteAttacheSelect) {
+            universiteAttacheSelect.addEventListener('change', this.handleUniversiteChoice.bind(this));
+        }
+
         // Bouton d'exportation PDF de la liste
         const exportPdfBtn = document.getElementById('exportPdfBtn');
         exportPdfBtn.addEventListener('click', this.handleExportPDF.bind(this));
@@ -582,6 +588,25 @@ class ProfesseurApp {
         }
     }
 
+    handleUniversiteChoice() {
+        const universiteAttacheSelect = document.getElementById('universiteAttache');
+        const autresUniversiteSection = document.getElementById('autresUniversiteSection');
+        const autresUniversiteInput = document.getElementById('autresUniversite');
+        
+        const choice = universiteAttacheSelect.value;
+        
+        if (choice === 'Autres') {
+            // Afficher le champ pour préciser l'université
+            autresUniversiteSection.style.display = 'block';
+            autresUniversiteInput.required = true;
+        } else {
+            // Masquer le champ
+            autresUniversiteSection.style.display = 'none';
+            autresUniversiteInput.required = false;
+            autresUniversiteInput.value = ''; // Vider le champ
+        }
+    }
+
     async handleFormSubmit(e) {
         e.preventDefault();
         
@@ -589,6 +614,18 @@ class ProfesseurApp {
         
         try {
             this.showLoading();
+            
+            // Vérifier si l'utilisateur a saisi une université personnalisée
+            const universiteAttache = formData.get('universiteAttache');
+            const autresUniversite = formData.get('autresUniversite');
+            
+            if (universiteAttache === 'Autres' && autresUniversite && autresUniversite.trim()) {
+                // Ajouter l'université à etab-new.json
+                await this.addNewUniversity(autresUniversite.trim());
+                
+                // Mettre à jour formData avec le nom de l'université personnalisée
+                formData.set('universiteAttache', autresUniversite.trim());
+            }
             
             // Vérifier si c'est une édition ou une création
             if (this.editingProfesseurId) {
@@ -629,6 +666,31 @@ class ProfesseurApp {
             this.showMessage(error.message || 'Erreur lors de l\'enregistrement.', 'error');
         } finally {
             this.hideLoading();
+        }
+    }
+
+    async addNewUniversity(universityName) {
+        try {
+            const response = await fetch(`${this.db.apiURL}/universities/add-new`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    name: universityName,
+                    shortname: universityName.substring(0, 10).toUpperCase(),
+                    path: `LOGO/${universityName.replace(/\s+/g, '-')}.png`
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Erreur lors de l\'ajout de l\'université');
+            }
+
+            console.log(`✅ Université '${universityName}' ajoutée à etab-new.json`);
+        } catch (error) {
+            console.error('Erreur lors de l\'ajout de l\'université:', error);
+            // On ne lance pas d'erreur pour ne pas bloquer l'enregistrement du professeur
         }
     }
 

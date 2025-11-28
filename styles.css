@@ -306,6 +306,7 @@ body {
 .checkbox-label {
     display: flex;
     align-items: center;
+    flex-direction: row !important;
     gap: 10px;
     margin-bottom: 0;
     font-weight: 600;

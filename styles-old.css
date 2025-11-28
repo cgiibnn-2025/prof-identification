@@ -345,6 +345,7 @@ body {
     display: flex !important;
     align-items: flex-start;
     gap: 10px;
+    flex-direction: row !important;
     cursor: pointer;
     padding: 10px 0;
 }

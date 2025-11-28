@@ -472,7 +472,7 @@
     {
         "name": "Institut Supérieur de Développement Rural de Kitsombiro",
         "shortname": "ISDR Kitsumbiro",
-        "path": "LOGO/ISDR Kitsumbiro.png"
+        "path": "LOGO/ISDR Kitsombiro.png"
     },
     {
         "name": "Institut Supérieur d Etudes Agronomiques Vétérinaires et Forestières de Butembo",
@@ -585,7 +585,7 @@
         "path": "LOGO/UOB.png"
     },
     {
-        "name": "6 Institut Supérieur de Développement Rural de Beni",
+        "name": "Institut Supérieur de Développement Rural de Beni",
         "shortname": "ISDR Beni",
         "path": "LOGO/ISDR Beni.png"
     },
@@ -625,7 +625,7 @@
         "path": "LOGO/UNIC Beni.png"
     },
     {
-        "name": "6 Institut Supérieur des Techniques Médicales d’ Oicha",
+        "name": "Institut Supérieur des Techniques Médicales d’ Oicha",
         "shortname": "ISTM Oicha",
         "path": "LOGO/ISTM Oicha.png"
     },
@@ -675,171 +675,6 @@
         "path": "LOGO/Unio.png"
     },
     {
-        "name": "INSTITUT SUPERIEUR DE COMMERCE DE BULUNGU",
-        "shortname": "ISC-BULUNGU",
-        "path": "LOGO/ISC-BULUNGU.png"
-    },
-    {
-        "name": "INSTITUT SUPERIEUR DE COMMERCE D'ISIRO",
-        "shortname": "ISC-ISIRO",
-        "path": "LOGO/ISC-ISIRO.png"
-    },
-    {
-        "name": "INSTITUT SUPERIEUR DE COMMERCE DE KINDU",
-        "shortname": "ISC-KINDU",
-        "path": "LOGO/ISC-KINDU.png"
-    },
-    {
-        "name": "INSTITUT SUPERIEUR DE COMMERCE DE TSHIKAPA",
-        "shortname": "ISC-TSHIKAPA",
-        "path": "LOGO/ISC-TSHIKAPA.png"
-    },
-    {
-        "name": "INSTITUT SUPERIEUR DE COMMERCE DE LODJA",
-        "shortname": "ISC-LODJA",
-        "path": "LOGO/ISC-LODJA.png"
-    },
-    {
-        "name": "INSTITUT SUPERIEUR DE COMMERCE DE KISANGANI",
-        "shortname": "ISC-KISANGANI",
-        "path": "LOGO/ISC-KISANGANI.png"
-    },
-    {
-        "name": "Université des Martyrs du Congo",
-        "shortname": "UNIM-RDC",
-        "path": "LOGO/UNIM-RDC.png"
-    },
-    {
-        "name": "INSTITUT SUPERIEUR DES TECHNIQUES APPLIQUÉES DE GOMA",
-        "shortname": "ISTA-GOMA",
-        "path": "LOGO/ISTA-GOMA.png"
-    },
-    {
-        "name": "Université Libre des Pays des Grands Lacs de Goma",
-        "shortname": "ULPGL-GOMA",
-        "path": "LOGO/ULPGL-GOMA.png"
-    },
-    {
-        "name": "Institut Supérieur Pédagogique de MACHUMBI",
-        "shortname": "ISP-MACHUMBI",
-        "path": "LOGO/ISP-MACHUMBI.png"
-    },
-    {
-        "name": "UNIVERSITE DE DJUMA",
-        "shortname": "UNIDJU",
-        "path": "LOGO/UNIDJU.png"
-    },
-    {
-        "name": "UNIVERSITE DE GBADOLITE",
-        "shortname": "UNIGBA",
-        "path": "LOGO/UNIGBA.png"
-    },
-    {
-        "name": "UNIVERSITE DE KABINDA",
-        "shortname": "UNIKA",
-        "path": "LOGO/UNIKA.png"
-    },
-    {
-        "name": "UNIVERSITE DE KALEMIE",
-        "shortname": "UNIKAL",
-        "path": "LOGO/UNIKAL.png"
-    },
-    {
-        "name": "UNIVERSITE DE KAMINA",
-        "shortname": "UNIKAM",
-        "path": "LOGO/UNIKAM.png"
-    },
-    {
-        "name": "UNIVERSITE DE KANANGA",
-        "shortname": "UNIKAN",
-        "path": "LOGO/UNIKAN.png"
-    },
-    {
-        "name": "UNIVERSITE DU KWANGO",
-        "shortname": "UNIKWANGO",
-        "path": "LOGO/UNIKWANGO.png"
-    },
-    {
-        "name": "UNIVERSITE DE LIKASI",
-        "shortname": "UNILIK",
-        "path": "LOGO/UNILIK.png"
-    },
-    {
-        "name": "UNIVERSITE DE LISALA",
-        "shortname": "UNILIS",
-        "path": "LOGO/UNILIS.png"
-    },
-    {
-        "name": "UNIVERSITE NOTRE DAME DE LOMAMI",
-        "shortname": "UNILO",
-        "path": "LOGO/UNILO.png"
-    },
-    {
-        "name": "UNIVERSITE DE LODJA",
-        "shortname": "UNILOD",
-        "path": "LOGO/UNILOD.png"
-    },
-    {
-        "name": "UNIVERSITE DE LUSAMBO",
-        "shortname": "UNILUS",
-        "path": "LOGO/UNILUS.png"
-    },
-    {
-        "name": "UNIVERSITE DE MALEMB-NKULU",
-        "shortname": "UNIMALEMBANKULU",
-        "path": "LOGO/UNIMALEMBANKULU.png"
-    },
-    {
-        "name": "UNIVERSITE DE MBANDAKA",
-        "shortname": "UNIMBA",
-        "path": "LOGO/UNIMBA.png"
-    },
-    {
-        "name": "UNIVERSITE DE MWENE–DITU",
-        "shortname": "UNIMWD",
-        "path": "LOGO/UNIMWD.png"
-    },
-    {
-        "name": "UNIVERSITE NOTRE DAME DE TSHUMBE",
-        "shortname": "UNITSHU",
-        "path": "LOGO/UNITSHU.png"
-    },
-    {
-        "name": "UNIVERSITE OFFICIELLE DE MBUJI-MAYI",
-        "shortname": "UOM",
-        "path": "LOGO/UOM.png"
-    },
-    {
-        "name": "UNIVERSITE OFFICIELLE DE SEMULIKI DE BENI",
-        "shortname": "UOS- BENI",
-        "path": "LOGO/UOS- BENI.png"
-    },
-    {
-        "name": "UNIVERSITE OFFICIELLE YABAONDO",
-        "shortname": "UOY",
-        "path": "LOGO/UOY.png"
-    },
-    {
-        "name": "UNIVERSITE PATRICE EMERY LUMUMBA DE WEMBO-NYAMA",
-        "shortname": "UPEL-WEMBO-NYAMA",
-        "path": "LOGO/UPEL-WEMBO-NYAMA.png"
-    },
-    {
-        "name": "UNIVERSITE DES SCIENCES ET DE TECHNOLOGIES DE LODJA",
-        "shortname": "USTC-LODJA",
-        "path": "LOGO/USTC-LODJA.png"
-    },
-    {
-        "name": "INSTITUT FACULTAIRE DES SCIENCES AGRONOMIQUES DE YANGAMBI",
-        "shortname": "IFA-YANGAMBI",
-        "path": "LOGO/IFA-YANGAMBI.png"
-    },
-    {
-        "name": "CENTRE UNIVERSITAIRE DE LA PAIX DE BUKAVU",
-        "shortname": "CUP-BUKAVU",
-        "path": "LOGO/CUP-BUKAVU.png"
-    },
-    {
         "name": "INSTITUT SUPERIEUR DE COMMERCE  UVIRA",
         "shortname": "ISC UVIRA",
         "path": "LOGO/ISC UVIRA.png"
@@ -865,7 +700,7 @@
         "path": "LOGO/ISDR WALIKALE.png"
     },
     {
-        "name": "? INSTITUT SUPERIEUR PEDAGOGIQUE DE KAZIBA",
+        "name": "ISP  DE KAZIBA",
         "shortname": "ISP  DE KAZIBA",
         "path": "LOGO/ISP  DE KAZIBA.png"
     },
@@ -935,7 +770,7 @@
         "path": "LOGO/CUM.png"
     },
     {
-        "name": "2t INSTITUT SUPERIEUR DES TECHNIQUES MEDICALES DE KANYAMULANDE",
+        "name": "INSTITUT SUPERIEUR DES TECHNIQUES MEDICALES DE KANYAMULANDE",
         "shortname": "ISTM-KANYAMULANDE",
         "path": "LOGO/ISTM-KANYAMULANDE.png"
     },
@@ -983,6 +818,271 @@
         "name": "Institut Supérieur Pédagogique de Kirotche",
         "shortname": "ISP-KIROTCHE",
         "path": "LOGO/ISP-KIROTCHE.png"
+    },
+    {
+        "name": "Académie des beaux-arts de Kinshasa",
+        "shortname": "ABA",
+        "path": "LOGO/ABA.png"
+    },
+    {
+        "name": "Institut supérieur de statistiques de Kinshasa",
+        "shortname": "ISS",
+        "path": "LOGO/ISS.png"
+    },
+    {
+        "name": "Haute École de Commerce de Kinshasa",
+        "shortname": "HEC",
+        "path": "LOGO/HEC.png"
+    },
+    {
+        "name": "Institut National de Bâtiment et Travaux Publics",
+        "shortname": "INBTP",
+        "path": "LOGO/INBTP.png"
+    },
+    {
+        "name": "Institut Supérieur d'Architecture et d'Urbanisme",
+        "shortname": "ISAU",
+        "path": "LOGO/ISAU.png"
+    },
+    {
+        "name": "Institut Supérieur de Techniques Appliquées de Kinshasa",
+        "shortname": "ISTA",
+        "path": "LOGO/ISTA.png"
+    },
+    {
+        "name": "ISTM Kinshasa",
+        "shortname": "ISTM",
+        "path": "LOGO/ISTM.png"
+    },
+    {
+        "name": "Université de l’Uélé",
+        "shortname": "UNIKIN-UELE",
+        "path": "LOGO/UNIKIN-UELE.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Bondo",
+        "shortname": "ISP-BONDO",
+        "path": "LOGO/ISP-BONDO.png"
+    },
+    {
+        "name": "Institut Supérieur Pédagogique de Buta",
+        "shortname": "ISP-BUTA",
+        "path": "LOGO/ISP-BUTA.png"
+    },
+    {
+        "name": "ISTM Buta",
+        "shortname": "ISTM-BUTA",
+        "path": "LOGO/ISTM-BUTA.png"
+    },
+    {
+        "name": "IBTP Buta",
+        "shortname": "IBTP-BUTA",
+        "path": "LOGO/IBTP-BUTA.png"
+    },
+    {
+        "name": "Institut Supérieur de Commerce de Buta",
+        "shortname": "ISC-BUTA",
+        "path": "LOGO/ISC-BUTA.png"
+    },
+    {
+        "name": "ISDR Amadi Poko",
+        "shortname": "ISDR-AMADI-POKO",
+        "path": "LOGO/ISDR-AMADI-POKO.png"
+    },
+    {
+        "name": "Université de Mbandaka",
+        "shortname": "U-MBANDAKA",
+        "path": "LOGO/U-MBANDAKA.png"
+    },
+    {
+        "name": "ISP Mbandaka",
+        "shortname": "ISP-MBANDAKA",
+        "path": "LOGO/ISP-MBANDAKA.png"
+    },
+    {
+        "name": "ISDR Mbandaka",
+        "shortname": "ISDR-MBANDAKA",
+        "path": "LOGO/ISDR-MBANDAKA.png"
+    },
+    {
+        "name": "Institut Supérieur de Pêche de Mbandaka",
+        "shortname": "ISPPECHE-MBANDAKA",
+        "path": "LOGO/ISPPECHE-MBANDAKA.png"
+    },
+    {
+        "name": "ISTM Basankusu",
+        "shortname": "ISTM-BASANKUSU",
+        "path": "LOGO/ISTM-BASANKUSU.png"
+    },
+    {
+        "name": "ISTM Mbandaka",
+        "shortname": "ISTM-MBANDAKA",
+        "path": "LOGO/ISTM-MBANDAKA.png"
+    },
+    {
+        "name": "Institut Supérieur de l'Industrie du Bois (ISIB) Basankusu",
+        "shortname": "ISIB-BASANKUSU",
+        "path": "LOGO/ISIB-BASANKUSU.png"
+    },
+    {
+        "name": "ISP Bokungu",
+        "shortname": "ISP-BOKUNGU",
+        "path": "LOGO/ISP-BOKUNGU.png"
+    },
+    {
+        "name": "ISDR Bosondjo",
+        "shortname": "ISDR-BOSONDJO",
+        "path": "LOGO/ISDR-BOSONDJO.png"
+    },
+    {
+        "name": "Université de Likasi",
+        "shortname": "UNILIK",
+        "path": "LOGO/UNILIK.png"
+    },
+    {
+        "name": "ISP Lubumbashi",
+        "shortname": "ISP-LUBUMBASHI",
+        "path": "LOGO/ISP-LUBUMBASHI.png"
+    },
+    {
+        "name": "ISTA Lubumbashi",
+        "shortname": "ISTA-LUBUMBASHI",
+        "path": "LOGO/ISTA-LUBUMBASHI.png"
+    },
+    {
+        "name": "ISS Lubumbashi",
+        "shortname": "ISS-LUBUMBASHI",
+        "path": "LOGO/ISS-LUBUMBASHI.png"
+    },
+    {
+        "name": "ISC Lubumbashi",
+        "shortname": "ISC-LUBUMBASHI",
+        "path": "LOGO/ISC-LUBUMBASHI.png"
+    },
+    {
+        "name": "ISTM Lubumbashi",
+        "shortname": "ISTM-LUBUMBASHI",
+        "path": "LOGO/ISTM-LUBUMBASHI.png"
+    },
+    {
+        "name": "ISES Lubumbashi",
+        "shortname": "ISES-LUBUMBASHI",
+        "path": "LOGO/ISES-LUBUMBASHI.png"
+    },
+    {
+        "name": "ISPT Likasi",
+        "shortname": "ISPT-LIKASI",
+        "path": "LOGO/ISPT-LIKASI.png"
+    },
+    {
+        "name": "ISP Mitwaba",
+        "shortname": "ISP-MITWABA",
+        "path": "LOGO/ISP-MITWABA.png"
+    },
+    {
+        "name": "ISTM Mitwaba",
+        "shortname": "ISTM-MITWABA",
+        "path": "LOGO/ISTM-MITWABA.png"
+    },
+    {
+        "name": "ISP Pweto",
+        "shortname": "ISP-PWETO",
+        "path": "LOGO/ISP-PWETO.png"
+    },
+    {
+        "name": "Université de Kamina",
+        "shortname": "UNIKAM",
+        "path": "LOGO/UNIKAM.png"
+    },
+    {
+        "name": "Université de Malemba-Nkulu",
+        "shortname": "UNIMALEMBANKULU",
+        "path": "LOGO/UNIMALEMBANKULU.png"
+    },
+    {
+        "name": "ISTM Kamina",
+        "shortname": "ISTM-KAMINA",
+        "path": "LOGO/ISTM-KAMINA.png"
+    },
+    {
+        "name": "ISTM Mulungu",
+        "shortname": "ISTM-MULONGU",
+        "path": "LOGO/ISTM-MULONGU.png"
+    },
+    {
+        "name": "ISDR Kongolo",
+        "shortname": "ISDR-KONGOLO",
+        "path": "LOGO/ISDR-KONGOLO.png"
+    },
+    {
+        "name": "ISP Kanama",
+        "shortname": "ISP-KANAMA",
+        "path": "LOGO/ISP-KANAMA.png"
+    },
+    {
+        "name": "ISP Kabongo",
+        "shortname": "ISP-KABONGO",
+        "path": "LOGO/ISP-KABONGO.png"
+    },
+    {
+        "name": "ISP Kamina",
+        "shortname": "ISP-KAMINA",
+        "path": "LOGO/ISP-KAMINA.png"
+    },
+    {
+        "name": "ISP Malemba Nkulu",
+        "shortname": "ISP-MALEMBA-NKULU",
+        "path": "LOGO/ISP-MALEMBA-NKULU.png"
+    },
+    {
+        "name": "ISP Faradje",
+        "shortname": "ISP-FARADJE",
+        "path": "LOGO/ISP-FARADJE.png"
+    },
+    {
+        "name": "ISP Isiro",
+        "shortname": "ISP-ISIRO",
+        "path": "LOGO/ISP-ISIRO.png"
+    },
+    {
+        "name": "ISP Watsa",
+        "shortname": "ISP-WATSA",
+        "path": "LOGO/ISP-WATSA.png"
+    },
+    {
+        "name": "ISC Isiro",
+        "shortname": "ISC-ISIRO",
+        "path": "LOGO/ISC-ISIRO.png"
+    },
+    {
+        "name": "ISTM Wamba",
+        "shortname": "ISTM-WAMBA",
+        "path": "LOGO/ISTM-WAMBA.png"
+    },
+    {
+        "name": "ISDR Watsa",
+        "shortname": "ISDR-WATSA",
+        "path": "LOGO/ISDR-WATSA.png"
+    },
+    {
+        "name": "ISDR Makoro",
+        "shortname": "ISDR-MAKORO",
+        "path": "LOGO/ISDR-MAKORO.png"
+    },
+    {
+        "name": "ISTD Dungu",
+        "shortname": "ISTD-DUNGU",
+        "path": "LOGO/ISTD-DUNGU.png"
+    },
+    {
+        "name": "ISTM Kibali Dungu",
+        "shortname": "ISTM-KIBALI-DUNGU",
+        "path": "LOGO/ISTM-KIBALI-DUNGU.png"
+    },
+    {
+        "name": "ISTD Legu",
+        "shortname": "ISTD-LEGU",
+        "path": "LOGO/ISTD-LEGU.png"
     },
     {
         "name": "Autres",

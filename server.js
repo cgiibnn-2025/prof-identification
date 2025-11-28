@@ -376,6 +376,60 @@ app.get('/api/universities', (req, res) => {
     });
 });
 
+// Route pour ajouter une nouvelle université à etab-new.json
+app.post('/api/universities/add-new', (req, res) => {
+    try {
+        const { name, shortname, path } = req.body;
+        
+        if (!name || !name.trim()) {
+            return res.status(400).json({ error: 'Le nom de l\'université est requis' });
+        }
+
+        // Chemin du fichier etab-new.json
+        const etabNewPath = path.join(__dirname, 'etab-new.json');
+        
+        // Lire le fichier existant ou créer un nouveau tableau
+        let universities = [];
+        if (fs.existsSync(etabNewPath)) {
+            try {
+                const fileContent = fs.readFileSync(etabNewPath, 'utf8');
+                universities = JSON.parse(fileContent);
+            } catch (parseErr) {
+                console.warn('Erreur lors de la lecture de etab-new.json, création d\'un nouveau fichier');
+                universities = [];
+            }
+        }
+
+        // Vérifier si l'université existe déjà
+        const exists = universities.some(u => u.name.toLowerCase() === name.toLowerCase());
+        if (exists) {
+            return res.status(400).json({ error: 'Cette université existe déjà dans la liste' });
+        }
+
+        // Ajouter la nouvelle université
+        const newUniversity = {
+            name: name.trim(),
+            shortname: shortname || name.substring(0, 10).toUpperCase(),
+            path: path || `LOGO/${name.replace(/\s+/g, '-')}.png`
+        };
+
+        universities.push(newUniversity);
+
+        // Sauvegarder le fichier
+        fs.writeFileSync(etabNewPath, JSON.stringify(universities, null, 4), 'utf8');
+        
+        console.log(`✅ Université '${name}' ajoutée à etab-new.json`);
+        res.json({ 
+            success: true, 
+            message: `Université '${name}' ajoutée avec succès`,
+            university: newUniversity 
+        });
+    } catch (error) {
+        console.error('Erreur lors de l\'ajout de l\'université:', error);
+        res.status(500).json({ error: 'Erreur serveur lors de l\'ajout de l\'université' });
+    }
+});
+
 // Route pour récupérer un professeur par ID
 app.get('/api/professeurs/:id', (req, res) => {
     const id = req.params.id;
